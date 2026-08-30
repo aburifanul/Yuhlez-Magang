@@ -34,7 +34,7 @@ class ProjectCheck extends Command
     protected $signature = 'project:check';
 
     protected $description =
-        'Check Migration, Model, Relationship, FK, Route, Controller, Method, Model, View dan Redirect';
+        'Check Model, Migration, Table, Relationship, Controller, Route, Method dan View';
 
     protected int $ok = 0;
     protected int $warning = 0;
@@ -42,20 +42,92 @@ class ProjectCheck extends Command
 
     protected array $migrationCache = [];
 
-    protected array $models = [
-        Certificate::class,
-        Company::class,
-        Intern::class,
-        InternshipParticipant::class,
-        InternshipPosition::class,
-        InternshipProgram::class,
-        InternshipProgramBanner::class,
-        InternshipRegistration::class,
-        User::class,
-        Work::class,
-        WorkMember::class,
-        WorkPhoto::class,
+    /*
+    |--------------------------------------------------------------------------
+    | MODEL → CONTROLLER → ROUTE
+    |--------------------------------------------------------------------------
+    */
+
+    protected array $modules = [
+
+        User::class => [
+            'controller' => \App\Http\Controllers\Root\UserController::class,
+            'route_prefix' => 'users',
+            'route_name' => 'root.users',
+        ],
+
+        Company::class => [
+            'controller' => \App\Http\Controllers\Root\CompanyController::class,
+            'route_prefix' => 'companies',
+            'route_name' => 'root.companies',
+        ],
+
+        Intern::class => [
+            'controller' => \App\Http\Controllers\Root\InternController::class,
+            'route_prefix' => 'interns',
+            'route_name' => 'root.interns',
+        ],
+
+        InternshipProgram::class => [
+            'controller' => \App\Http\Controllers\Root\InternshipProgramController::class,
+            'route_prefix' => 'internship-programs',
+            'route_name' => 'root.internship-programs',
+        ],
+
+        InternshipProgramBanner::class => [
+            'controller' => \App\Http\Controllers\Root\InternshipProgramBannerController::class,
+            'route_prefix' => 'internship-program-banners',
+            'route_name' => 'root.internship-program-banners',
+        ],
+
+        InternshipPosition::class => [
+            'controller' => \App\Http\Controllers\Root\InternshipPositionController::class,
+            'route_prefix' => 'internship-positions',
+            'route_name' => 'root.internship-positions',
+        ],
+
+        InternshipRegistration::class => [
+            'controller' => \App\Http\Controllers\Root\InternshipRegistrationController::class,
+            'route_prefix' => 'internship-registrations',
+            'route_name' => 'root.internship-registrations',
+        ],
+
+        InternshipParticipant::class => [
+            'controller' => \App\Http\Controllers\Root\InternshipParticipantController::class,
+            'route_prefix' => 'internship-participants',
+            'route_name' => 'root.internship-participants',
+        ],
+
+        Certificate::class => [
+            'controller' => \App\Http\Controllers\Root\CertificateController::class,
+            'route_prefix' => 'certificates',
+            'route_name' => 'root.certificates',
+        ],
+
+        Work::class => [
+            'controller' => \App\Http\Controllers\Root\WorkController::class,
+            'route_prefix' => 'works',
+            'route_name' => 'root.works',
+        ],
+
+        WorkPhoto::class => [
+            'controller' => \App\Http\Controllers\Root\WorkPhotoController::class,
+            'route_prefix' => 'work-photos',
+            'route_name' => 'root.work-photos',
+        ],
+
+        WorkMember::class => [
+            'controller' => \App\Http\Controllers\Root\WorkMemberController::class,
+            'route_prefix' => 'work-members',
+            'route_name' => 'root.work-members',
+        ],
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | HANDLE
+    |--------------------------------------------------------------------------
+    */
 
     public function handle(): int
     {
@@ -67,9 +139,12 @@ class ProjectCheck extends Command
 
         $this->header();
 
-        $this->checkModels();
-
-        $this->checkRoutes();
+        foreach ($this->modules as $modelClass => $config) {
+            $this->checkModule(
+                $modelClass,
+                $config
+            );
+        }
 
         $this->summary();
 
@@ -97,7 +172,7 @@ class ProjectCheck extends Command
         );
 
         $this->info(
-            'MIGRATION → MODEL → RELATIONSHIP → FK → ROUTE → CONTROLLER → VIEW'
+            'MODEL → MIGRATION → TABLE → RELATIONSHIP → CONTROLLER → ROUTE → VIEW'
         );
 
         $this->info(
@@ -132,133 +207,255 @@ class ProjectCheck extends Command
 
     /*
     |--------------------------------------------------------------------------
-    | MODEL CHECK
+    | MODULE
     |--------------------------------------------------------------------------
     */
 
-    protected function checkModels(): void
-    {
+    protected function checkModule(
+        string $modelClass,
+        array $config
+    ): void {
+
+        $modelName =
+            class_basename($modelClass);
+
+        $this->line(
+            '============================================================'
+        );
+
         $this->info(
-            '[1] MODEL → TABLE → RELATIONSHIP → FK → MIGRATION'
+            strtoupper($modelName)
         );
 
         $this->line(
             '------------------------------------------------------------'
         );
 
-        foreach ($this->models as $modelClass) {
-            $this->checkModel($modelClass);
-        }
+        /*
+        |--------------------------------------------------------------------------
+        | MODEL
+        |--------------------------------------------------------------------------
+        */
 
-        $this->newLine();
-    }
-
-    protected function checkModel(string $modelClass): void
-    {
-        try {
-
-            if (!class_exists($modelClass)) {
-
-                $this->error++;
-
-                $this->line(
-                    '❌ ' .
-                    class_basename($modelClass) .
-                    ' — Model tidak ditemukan'
-                );
-
-                return;
-            }
-
-            /** @var Model $model */
-            $model = new $modelClass();
-
-            $modelName = class_basename($modelClass);
-
-            $table = $model->getTable();
-
-            /*
-            |--------------------------------------------------------------------------
-            | MODEL
-            |--------------------------------------------------------------------------
-            */
-
-            $this->ok++;
-
-            /*
-            |--------------------------------------------------------------------------
-            | TABLE
-            |--------------------------------------------------------------------------
-            */
-
-            if (!Schema::hasTable($table)) {
-
-                $this->error++;
-
-                $this->line(
-                    "❌ {$modelName} → {$table}"
-                );
-
-                $this->line(
-                    "   Table: ❌ tidak ditemukan"
-                );
-
-                return;
-            }
-
-            $this->ok++;
-
-            /*
-            |--------------------------------------------------------------------------
-            | MIGRATION
-            |--------------------------------------------------------------------------
-            */
-
-            $migrationFound =
-                $this->migrationExistsForTable($table);
-
-            if ($migrationFound) {
-
-                $this->ok++;
-
-            } else {
-
-                $this->warning++;
-            }
-
-            $this->line(
-                "✅ {$modelName} → {$table}"
-            );
-
-            $this->line(
-                '   Migration: ' .
-                (
-                    $migrationFound
-                    ? '✅'
-                    : '⚠️ File tidak ditemukan'
-                )
-            );
-
-            /*
-            |--------------------------------------------------------------------------
-            | RELATIONSHIPS
-            |--------------------------------------------------------------------------
-            */
-
-            $this->checkRelationships($model);
-
-        } catch (Throwable $e) {
+        if (!class_exists($modelClass)) {
 
             $this->error++;
 
             $this->line(
-                "❌ {$modelClass}"
+                'Model           : ❌ ' . $modelName
             );
 
             $this->line(
-                "   Error: {$e->getMessage()}"
+                'STATUS          : ❌ MODEL TIDAK DITEMUKAN'
+            );
+
+            $this->newLine();
+
+            return;
+        }
+
+        $this->ok++;
+
+        /** @var Model $model */
+        $model = new $modelClass();
+
+        $table = $model->getTable();
+
+        $this->line(
+            "Model           : ✅ {$modelName}"
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | MIGRATION
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $this->migrationExistsForTable($table)
+        ) {
+
+            $this->ok++;
+
+            $this->line(
+                "Migration       : ✅ {$table}"
+            );
+
+        } else {
+
+            $this->warning++;
+
+            $this->line(
+                "Migration       : ⚠️ {$table} tidak ditemukan"
             );
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | TABLE
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            Schema::hasTable($table)
+        ) {
+
+            $this->ok++;
+
+            $this->line(
+                "Table           : ✅ {$table}"
+            );
+
+        } else {
+
+            $this->error++;
+
+            $this->line(
+                "Table           : ❌ {$table}"
+            );
+
+            $this->line(
+                "STATUS          : ❌ TABLE TIDAK DITEMUKAN"
+            );
+
+            $this->newLine();
+
+            return;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | RELATIONSHIPS
+        |--------------------------------------------------------------------------
+        */
+
+        $this->line('');
+        $this->line('Relationships');
+
+        $relationshipCount =
+            $this->checkRelationships($model);
+
+        if ($relationshipCount === 0) {
+
+            $this->line(
+                '  └─ Tidak ada relationship'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CONTROLLER
+        |--------------------------------------------------------------------------
+        */
+
+        $this->line('');
+        $this->line('Controller');
+
+        $controller =
+            $config['controller'];
+
+        if (
+            class_exists($controller)
+        ) {
+
+            $this->ok++;
+
+            $this->line(
+                '  └─ ' .
+                class_basename($controller) .
+                ' : ✅'
+            );
+
+            $this->checkControllerMethods(
+                $controller,
+                $config
+            );
+
+        } else {
+
+            $this->error++;
+
+            $this->line(
+                '  └─ ' .
+                class_basename($controller) .
+                ' : ❌ TIDAK DITEMUKAN'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | ROUTES
+        |--------------------------------------------------------------------------
+        */
+
+        $this->line('');
+        $this->line('Routes');
+
+        $routes =
+            $this->getModuleRoutes(
+                $config['route_name']
+            );
+
+        if ($routes->isEmpty()) {
+
+            $this->error++;
+
+            $this->line(
+                '  └─ Route : ❌ TIDAK DITEMUKAN'
+            );
+
+        } else {
+
+            foreach ($routes as $route) {
+
+                $this->ok++;
+
+                $methods =
+                    implode(
+                        '|',
+                        array_diff(
+                            $route->methods(),
+                            ['HEAD']
+                        )
+                    );
+
+                $this->line(
+                    "  ├─ {$methods} /{$route->uri()} : ✅"
+                );
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIEWS
+        |--------------------------------------------------------------------------
+        */
+
+        $this->line('');
+        $this->line('Views');
+
+        $this->checkViews(
+            $config['route_name']
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | STATUS
+        |--------------------------------------------------------------------------
+        */
+
+        $status =
+            $this->moduleStatus(
+                $modelClass,
+                $config
+            );
+
+        $this->line('');
+        $this->line(
+            "STATUS          : {$status}"
+        );
+
+        $this->newLine();
     }
 
     /*
@@ -267,186 +464,454 @@ class ProjectCheck extends Command
     |--------------------------------------------------------------------------
     */
 
-    protected function checkRelationships(Model $model): void
-    {
-        $reflection =
-            new ReflectionClass($model);
+    protected function checkRelationships(
+        Model $model
+    ): int {
 
-        foreach (
-            $reflection->getMethods(
-                ReflectionMethod::IS_PUBLIC
-            )
-            as $method
-        ) {
+        $count = 0;
+
+        try {
+
+            $reflection =
+                new ReflectionClass($model);
+
+            foreach (
+                $reflection->getMethods(
+                    ReflectionMethod::IS_PUBLIC
+                ) as $method
+            ) {
+
+                if (
+                    $method->class !== get_class($model) ||
+                    $method->getNumberOfParameters() > 0
+                ) {
+                    continue;
+                }
+
+                try {
+
+                    $relation =
+                        $method->invoke($model);
+
+                    if (
+                        !$relation instanceof BelongsTo &&
+                        !$relation instanceof HasMany &&
+                        !$relation instanceof HasOne &&
+                        !$relation instanceof MorphMany &&
+                        !$relation instanceof BelongsToMany
+                    ) {
+                        continue;
+                    }
+
+                    $count++;
+
+                    $name =
+                        $method->getName();
+
+                    $related =
+                        $relation->getRelated();
+
+                    $relatedClass =
+                        get_class($related);
+
+                    $relatedTable =
+                        $related->getTable();
+
+                    $type =
+                        class_basename(
+                            get_class($relation)
+                        );
+
+                    /*
+                    |------------------------------------------------------------------
+                    | TARGET TABLE
+                    |------------------------------------------------------------------
+                    */
+
+                    if (
+                        Schema::hasTable(
+                            $relatedTable
+                        )
+                    ) {
+
+                        $tableStatus = '✅';
+
+                    } else {
+
+                        $tableStatus = '❌';
+
+                        $this->error++;
+                    }
+
+                    /*
+                    |------------------------------------------------------------------
+                    | FK
+                    |------------------------------------------------------------------
+                    */
+
+                    $fkStatus = true;
+
+                    if (
+                        $relation instanceof BelongsTo
+                    ) {
+
+                        $foreignKey =
+                            $relation->getForeignKeyName();
+
+                        $fkStatus =
+                            Schema::hasColumn(
+                                $model->getTable(),
+                                $foreignKey
+                            );
+
+                    } elseif (
+                        $relation instanceof HasMany ||
+                        $relation instanceof HasOne
+                    ) {
+
+                        $foreignKey =
+                            $relation->getForeignKeyName();
+
+                        $fkStatus =
+                            Schema::hasColumn(
+                                $relatedTable,
+                                $foreignKey
+                            );
+
+                    } elseif (
+                        $relation instanceof MorphMany
+                    ) {
+
+                        $idColumn =
+                            $relation->getForeignKeyName();
+
+                        $typeColumn =
+                            $relation->getMorphType();
+
+                        $fkStatus =
+                            Schema::hasColumn(
+                                $relatedTable,
+                                $idColumn
+                            ) &&
+                            Schema::hasColumn(
+                                $relatedTable,
+                                $typeColumn
+                            );
+                    }
+
+                    if (!$fkStatus) {
+                        $this->error++;
+                    }
+
+                    /*
+                    |------------------------------------------------------------------
+                    | OUTPUT
+                    |------------------------------------------------------------------
+                    */
+
+                    $status =
+                        $fkStatus &&
+                        $tableStatus === '✅'
+                            ? '✅'
+                            : '❌';
+
+                    if ($status === '✅') {
+                        $this->ok++;
+                    }
+
+                    $this->line(
+                        "  ├─ {$name}() → " .
+                        class_basename($relatedClass) .
+                        " [{$type}] : {$status}"
+                    );
+
+                    if (
+                        $status === '❌'
+                    ) {
+
+                        $this->line(
+                            "  │    Table Target : {$tableStatus} {$relatedTable}"
+                        );
+                    }
+
+                } catch (Throwable $e) {
+
+                    continue;
+                }
+            }
+
+        } catch (Throwable $e) {
+
+            $this->warning++;
+
+            $this->line(
+                '  └─ Relationship : ⚠️ gagal diperiksa'
+            );
+        }
+
+        return $count;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CONTROLLER METHODS
+    |--------------------------------------------------------------------------
+    */
+
+    protected function checkControllerMethods(
+        string $controller,
+        array $config
+    ): void {
+
+        try {
+
+            $reflection =
+                new ReflectionClass($controller);
+
+            $methods = [
+                'index',
+                'create',
+                'store',
+                'show',
+                'edit',
+                'update',
+                'destroy',
+            ];
+
+            foreach ($methods as $methodName) {
+
+                if (
+                    !$reflection->hasMethod(
+                        $methodName
+                    )
+                ) {
+
+                    $this->error++;
+
+                    $this->line(
+                        "  └─ {$methodName}() : ❌"
+                    );
+
+                    continue;
+                }
+
+                $method =
+                    $reflection->getMethod(
+                        $methodName
+                    );
+
+                if (
+                    !$method->isPublic()
+                ) {
+
+                    $this->error++;
+
+                    $this->line(
+                        "  └─ {$methodName}() : ❌ bukan public"
+                    );
+
+                    continue;
+                }
+
+                $this->ok++;
+
+                $this->line(
+                    "  └─ {$methodName}() : ✅"
+                );
+            }
+
+        } catch (Throwable $e) {
+
+            $this->error++;
+
+            $this->line(
+                '  └─ Methods : ❌ gagal diperiksa'
+            );
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ROUTES
+    |--------------------------------------------------------------------------
+    */
+
+    protected function getModuleRoutes(
+        string $routeNamePrefix
+    ) {
+
+        return collect(
+            Route::getRoutes()
+        )->filter(
+            function ($route) use (
+                $routeNamePrefix
+            ) {
+
+                $name =
+                    $route->getName();
+
+                return $name &&
+                    str_starts_with(
+                        $name,
+                        $routeNamePrefix . '.'
+                    );
+            }
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | VIEWS
+    |--------------------------------------------------------------------------
+    */
+
+    protected function checkViews(
+        string $routeNamePrefix
+    ): void {
+
+        $routes =
+            $this->getModuleRoutes(
+                $routeNamePrefix
+            );
+
+        $checked = [];
+
+        foreach ($routes as $route) {
+
+            $name =
+                $route->getName();
+
+            if (!$name) {
+                continue;
+            }
+
+            $action =
+                $route->getAction('uses');
 
             if (
-                $method->class !== get_class($model) ||
-                $method->getNumberOfParameters() > 0
+                !is_string($action)
+            ) {
+                continue;
+            }
+
+            if (
+                !str_contains(
+                    $action,
+                    '@'
+                )
+            ) {
+                continue;
+            }
+
+            [
+                $controller,
+                $methodName
+            ] = explode(
+                '@',
+                $action,
+                2
+            );
+
+            if (
+                !class_exists($controller)
             ) {
                 continue;
             }
 
             try {
 
-                $relation =
-                    $method->invoke($model);
+                $reflection =
+                    new ReflectionClass(
+                        $controller
+                    );
 
                 if (
-                    !$relation instanceof BelongsTo &&
-                    !$relation instanceof HasMany &&
-                    !$relation instanceof HasOne &&
-                    !$relation instanceof MorphMany &&
-                    !$relation instanceof BelongsToMany
+                    !$reflection->hasMethod(
+                        $methodName
+                    )
                 ) {
                     continue;
                 }
 
-                $relationName =
-                    $method->getName();
-
-                $relatedModel =
-                    $relation->getRelated();
-
-                $relatedClass =
-                    get_class($relatedModel);
-
-                $relatedTable =
-                    $relatedModel->getTable();
-
-                /*
-                |--------------------------------------------------------------------------
-                | RELATED MODEL
-                |--------------------------------------------------------------------------
-                */
-
-                if (!class_exists($relatedClass)) {
-
-                    $this->error++;
-
-                    $this->line(
-                        "   ❌ {$relationName}() → " .
-                        class_basename($relatedClass) .
-                        " (Model tidak ditemukan)"
+                $method =
+                    $reflection->getMethod(
+                        $methodName
                     );
 
+                $file =
+                    $method->getFileName();
+
+                if (
+                    !$file ||
+                    !File::exists($file)
+                ) {
                     continue;
                 }
 
-                /*
-                |--------------------------------------------------------------------------
-                | RELATED TABLE
-                |--------------------------------------------------------------------------
-                */
-
-                if (
-                    Schema::hasTable($relatedTable)
-                ) {
-
-                    $this->ok++;
-
-                    $tableStatus = '✅';
-
-                } else {
-
-                    $this->error++;
-
-                    $tableStatus = '❌';
-                }
-
-                $type =
-                    class_basename(
-                        get_class($relation)
+                $source =
+                    implode(
+                        '',
+                        array_slice(
+                            file($file),
+                            $method->getStartLine() - 1,
+                            $method->getEndLine()
+                                - $method->getStartLine()
+                                + 1
+                        )
                     );
 
-                $this->line(
-                    "   {$tableStatus} {$relationName}() → " .
-                    class_basename($relatedClass) .
-                    " [{$type}]"
+                preg_match_all(
+                    "/return\s+view\(\s*['\"]([^'\"]+)['\"]/",
+                    $source,
+                    $matches
                 );
 
-                $this->line(
-                    "      Table Target: {$tableStatus} {$relatedTable}"
-                );
-
-                /*
-                |--------------------------------------------------------------------------
-                | BELONGS TO
-                |--------------------------------------------------------------------------
-                */
-
-                if ($relation instanceof BelongsTo) {
-
-                    $this->checkForeignKey(
-                        $model->getTable(),
-                        $relation->getForeignKeyName()
-                    );
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | HAS MANY / HAS ONE
-                |--------------------------------------------------------------------------
-                */
-
-                elseif (
-                    $relation instanceof HasMany ||
-                    $relation instanceof HasOne
+                foreach (
+                    $matches[1] ?? []
+                    as $view
                 ) {
-
-                    $this->checkForeignKey(
-                        $relatedTable,
-                        $relation->getForeignKeyName()
-                    );
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | BELONGS TO MANY
-                |--------------------------------------------------------------------------
-                */
-
-                elseif (
-                    $relation instanceof BelongsToMany
-                ) {
-
-                    $pivotTable =
-                        $relation->getTable();
 
                     if (
-                        Schema::hasTable($pivotTable)
+                        isset(
+                            $checked[$view]
+                        )
+                    ) {
+                        continue;
+                    }
+
+                    $checked[$view] = true;
+
+                    $viewPath =
+                        resource_path(
+                            'views/' .
+                            str_replace(
+                                '.',
+                                '/',
+                                $view
+                            ) .
+                            '.blade.php'
+                        );
+
+                    if (
+                        File::exists(
+                            $viewPath
+                        )
                     ) {
 
                         $this->ok++;
 
                         $this->line(
-                            "      Pivot Table: ✅ {$pivotTable}"
+                            "  ├─ {$view} : ✅"
                         );
 
                     } else {
 
-                        $this->error++;
+                        $this->warning++;
 
                         $this->line(
-                            "      Pivot Table: ❌ {$pivotTable}"
+                            "  ├─ {$view} : ⚠️ belum dibuat"
                         );
                     }
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | MORPH MANY
-                |--------------------------------------------------------------------------
-                */
-
-                elseif (
-                    $relation instanceof MorphMany
-                ) {
-
-                    $this->checkMorphKeys(
-                        $relatedTable,
-                        $relation->getForeignKeyName(),
-                        $relation->getMorphType()
-                    );
                 }
 
             } catch (Throwable $e) {
@@ -454,182 +919,211 @@ class ProjectCheck extends Command
                 continue;
             }
         }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | FOREIGN KEY
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkForeignKey(
-        string $table,
-        string $foreignKey
-    ): void {
 
         if (
-            Schema::hasColumn(
-                $table,
-                $foreignKey
-            )
+            empty($checked)
         ) {
 
-            $this->ok++;
-
             $this->line(
-                "      FK Column: ✅ {$foreignKey}"
-            );
-
-        } else {
-
-            $this->error++;
-
-            $this->line(
-                "      FK Column: ❌ {$foreignKey}"
-            );
-
-            return;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | MIGRATION FK
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $this->migrationContainsColumn(
-                $table,
-                $foreignKey
-            )
-        ) {
-
-            $this->ok++;
-
-            $this->line(
-                "      Migration FK: ✅ {$foreignKey}"
-            );
-
-        } else {
-
-            $this->warning++;
-
-            $this->line(
-                "      Migration FK: ⚠️ {$foreignKey} tidak terdeteksi"
+                '  └─ Tidak ada View yang terdeteksi'
             );
         }
     }
 
     /*
     |--------------------------------------------------------------------------
-    | MORPH
+    | MODULE STATUS
     |--------------------------------------------------------------------------
     */
 
-    protected function checkMorphKeys(
-        string $table,
-        string $idColumn,
-        string $typeColumn
-    ): void {
+    protected function moduleStatus(
+        string $modelClass,
+        array $config
+    ): string {
 
-        $idExists =
-            Schema::hasColumn(
-                $table,
-                $idColumn
-            );
+        $model = new $modelClass();
 
-        $typeExists =
-            Schema::hasColumn(
-                $table,
-                $typeColumn
-            );
+        $table =
+            $model->getTable();
+
+        /*
+        |------------------------------------------------------------------
+        | MODEL
+        |------------------------------------------------------------------
+        */
 
         if (
-            $idExists &&
-            $typeExists
+            !class_exists($modelClass)
         ) {
-
-            $this->ok += 2;
-
-            $this->line(
-                "      Morph FK: ✅ {$idColumn}"
-            );
-
-            $this->line(
-                "      Morph Type: ✅ {$typeColumn}"
-            );
-
-        } else {
-
-            $this->error++;
-
-            $this->line(
-                "      Morph Columns: ❌"
-            );
+            return '❌ MODEL';
         }
 
         /*
-        |--------------------------------------------------------------------------
-        | MIGRATION MORPH
-        |--------------------------------------------------------------------------
+        |------------------------------------------------------------------
+        | TABLE
+        |------------------------------------------------------------------
         */
 
-        $morphName =
-            str_replace(
-                '_id',
-                '',
-                $idColumn
-            );
+        if (
+            !Schema::hasTable($table)
+        ) {
+            return '❌ TABLE';
+        }
 
-        $migrationFound = false;
+        /*
+        |------------------------------------------------------------------
+        | CONTROLLER
+        |------------------------------------------------------------------
+        */
+
+        if (
+            !class_exists(
+                $config['controller']
+            )
+        ) {
+            return '❌ CONTROLLER';
+        }
+
+        /*
+        |------------------------------------------------------------------
+        | ROUTE
+        |------------------------------------------------------------------
+        */
+
+        if (
+            $this->getModuleRoutes(
+                $config['route_name']
+            )->isEmpty()
+        ) {
+            return '❌ ROUTE';
+        }
+
+        /*
+        |------------------------------------------------------------------
+        | VIEW
+        |------------------------------------------------------------------
+        */
+
+        $hasMissingView = false;
 
         foreach (
-            $this->migrationCache
-            as $content
+            $this->getModuleRoutes(
+                $config['route_name']
+            ) as $route
         ) {
 
+            $action =
+                $route->getAction('uses');
+
             if (
-                !preg_match(
-                    '/Schema::create\([\'"]' .
-                    preg_quote($table, '/') .
-                    '[\'"]/',
-                    $content
+                !is_string($action) ||
+                !str_contains(
+                    $action,
+                    '@'
                 )
             ) {
                 continue;
             }
 
+            [
+                $controller,
+                $methodName
+            ] = explode(
+                '@',
+                $action,
+                2
+            );
+
             if (
-                preg_match(
-                    '/->(?:morphs|nullableMorphs)\([\'"]' .
-                    preg_quote($morphName, '/') .
-                    '[\'"]\)/',
-                    $content
-                )
+                !class_exists($controller)
             ) {
+                continue;
+            }
 
-                $migrationFound = true;
+            try {
 
-                break;
+                $reflection =
+                    new ReflectionClass(
+                        $controller
+                    );
+
+                if (
+                    !$reflection->hasMethod(
+                        $methodName
+                    )
+                ) {
+                    continue;
+                }
+
+                $method =
+                    $reflection->getMethod(
+                        $methodName
+                    );
+
+                $file =
+                    $method->getFileName();
+
+                if (
+                    !$file ||
+                    !File::exists($file)
+                ) {
+                    continue;
+                }
+
+                $source =
+                    implode(
+                        '',
+                        array_slice(
+                            file($file),
+                            $method->getStartLine() - 1,
+                            $method->getEndLine()
+                                - $method->getStartLine()
+                                + 1
+                        )
+                    );
+
+                preg_match_all(
+                    "/return\s+view\(\s*['\"]([^'\"]+)['\"]/",
+                    $source,
+                    $matches
+                );
+
+                foreach (
+                    $matches[1] ?? []
+                    as $view
+                ) {
+
+                    $viewPath =
+                        resource_path(
+                            'views/' .
+                            str_replace(
+                                '.',
+                                '/',
+                                $view
+                            ) .
+                            '.blade.php'
+                        );
+
+                    if (
+                        !File::exists(
+                            $viewPath
+                        )
+                    ) {
+
+                        $hasMissingView = true;
+                    }
+                }
+
+            } catch (Throwable $e) {
+                continue;
             }
         }
 
-        if ($migrationFound) {
-
-            $this->ok++;
-
-            $this->line(
-                "      Migration Morph: ✅ {$morphName}"
-            );
-
-        } else {
-
-            $this->warning++;
-
-            $this->line(
-                "      Migration Morph: ⚠️ {$morphName} tidak terdeteksi"
-            );
+        if ($hasMissingView) {
+            return '⚠️ VIEW BELUM LENGKAP';
         }
+
+        return '✅ LENGKAP';
     }
 
     /*
@@ -650,93 +1144,11 @@ class ProjectCheck extends Command
             if (
                 preg_match(
                     '/Schema::create\([\'"]' .
-                    preg_quote($table, '/') .
+                    preg_quote(
+                        $table,
+                        '/'
+                    ) .
                     '[\'"]/',
-                    $content
-                )
-            ) {
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | MIGRATION COLUMN
-    |--------------------------------------------------------------------------
-    */
-
-    protected function migrationContainsColumn(
-        string $table,
-        string $column
-    ): bool {
-
-        foreach (
-            $this->migrationCache
-            as $content
-        ) {
-
-            if (
-                !preg_match(
-                    '/Schema::create\([\'"]' .
-                    preg_quote($table, '/') .
-                    '[\'"]/',
-                    $content
-                )
-            ) {
-                continue;
-            }
-
-            /*
-            |----------------------------------------------------------------------
-            | foreignId()
-            |----------------------------------------------------------------------
-            */
-
-            if (
-                preg_match(
-                    '/->foreignId\([\'"]' .
-                    preg_quote($column, '/') .
-                    '[\'"]\)/',
-                    $content
-                )
-            ) {
-                return true;
-            }
-
-            /*
-            |----------------------------------------------------------------------
-            | foreignIdFor()
-            |----------------------------------------------------------------------
-            */
-
-            if (
-                preg_match(
-                    '/->foreignIdFor\(/',
-                    $content
-                ) &&
-                str_contains(
-                    $content,
-                    $column
-                )
-            ) {
-                return true;
-            }
-
-            /*
-            |----------------------------------------------------------------------
-            | unsignedBigInteger()
-            |----------------------------------------------------------------------
-            */
-
-            if (
-                preg_match(
-                    '/->(?:unsignedBigInteger|bigInteger|integer|uuid|string)\([\'"]' .
-                    preg_quote($column, '/') .
-                    '[\'"]\)/',
                     $content
                 )
             ) {
@@ -745,678 +1157,6 @@ class ProjectCheck extends Command
         }
 
         return false;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | ROUTES
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkRoutes(): void
-    {
-        $this->info(
-            '[2] ROOT ROUTE → CONTROLLER → METHOD → MODEL → VIEW'
-        );
-
-        $this->line(
-            '------------------------------------------------------------'
-        );
-
-        $routes =
-            collect(Route::getRoutes())
-                ->filter(
-                    function ($route) {
-
-                        return str_starts_with(
-                            ltrim(
-                                $route->uri(),
-                                '/'
-                            ),
-                            'root'
-                        );
-                    }
-                );
-
-        if ($routes->isEmpty()) {
-
-            $this->warning++;
-
-            $this->warn(
-                '⚠️ Tidak ditemukan Root Route.'
-            );
-
-            $this->newLine();
-
-            return;
-        }
-
-        foreach ($routes as $route) {
-
-            $this->checkRoute($route);
-        }
-
-        $this->newLine();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | SINGLE ROUTE
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkRoute($route): void
-    {
-        $methods =
-            implode(
-                '|',
-                array_diff(
-                    $route->methods(),
-                    ['HEAD']
-                )
-            );
-
-        $uri =
-            '/' .
-            ltrim(
-                $route->uri(),
-                '/'
-            );
-
-        $uses =
-            $route->getAction('uses');
-
-        $routeName =
-            $route->getName();
-
-        $this->line(
-            "Route: {$methods} {$uri}"
-        );
-
-        if ($routeName) {
-
-            $this->line(
-                "   Name:       {$routeName}"
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | CLOSURE
-        |--------------------------------------------------------------------------
-        */
-
-        if ($uses instanceof Closure) {
-
-            $this->warning++;
-
-            $this->line(
-                '   Controller: ⚠️ Closure'
-            );
-
-            $this->newLine();
-
-            return;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | CONTROLLER ACTION
-        |--------------------------------------------------------------------------
-        */
-
-        if (!is_string($uses)) {
-
-            $this->error++;
-
-            $this->line(
-                '   Controller: ❌ Action tidak valid'
-            );
-
-            $this->newLine();
-
-            return;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | INVOKABLE
-        |--------------------------------------------------------------------------
-        */
-
-        if (!str_contains($uses, '@')) {
-
-            $controllerClass = $uses;
-
-            $method = '__invoke';
-
-        } else {
-
-            [
-                $controllerClass,
-                $method
-            ] = explode(
-                '@',
-                $uses,
-                2
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | CONTROLLER
-        |--------------------------------------------------------------------------
-        */
-
-        if (!class_exists($controllerClass)) {
-
-            $this->error++;
-
-            $this->line(
-                "   Controller: ❌ {$controllerClass}"
-            );
-
-            $this->newLine();
-
-            return;
-        }
-
-        $this->ok++;
-
-        $this->line(
-            "   Controller: ✅ {$controllerClass}"
-        );
-
-        /*
-        |--------------------------------------------------------------------------
-        | METHOD
-        |--------------------------------------------------------------------------
-        */
-
-        try {
-
-            $reflection =
-                new ReflectionClass(
-                    $controllerClass
-                );
-
-            if (
-                !$reflection->hasMethod(
-                    $method
-                )
-            ) {
-
-                $this->error++;
-
-                $this->line(
-                    "   Method:     ❌ {$method}()"
-                );
-
-                $this->newLine();
-
-                return;
-            }
-
-            $reflectionMethod =
-                $reflection->getMethod(
-                    $method
-                );
-
-            if (
-                !$reflectionMethod->isPublic()
-            ) {
-
-                $this->error++;
-
-                $this->line(
-                    "   Method:     ❌ {$method}() bukan public"
-                );
-
-                $this->newLine();
-
-                return;
-            }
-
-            $this->ok++;
-
-            $this->line(
-                "   Method:     ✅ {$method}()"
-            );
-
-            /*
-            |--------------------------------------------------------------------------
-            | MODEL
-            |--------------------------------------------------------------------------
-            */
-
-            $this->checkControllerModels(
-                $reflectionMethod
-            );
-
-            /*
-            |--------------------------------------------------------------------------
-            | VIEW / REDIRECT
-            |--------------------------------------------------------------------------
-            */
-
-            $this->checkControllerResponse(
-                $reflectionMethod
-            );
-
-        } catch (Throwable $e) {
-
-            $this->error++;
-
-            $this->line(
-                "   Method:     ❌ {$method}()"
-            );
-
-            $this->line(
-                "      Error: {$e->getMessage()}"
-            );
-        }
-
-        $this->newLine();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | CONTROLLER MODEL CHECK
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkControllerModels(
-        ReflectionMethod $method
-    ): void {
-
-        $foundModels = [];
-
-        /*
-        |--------------------------------------------------------------------------
-        | ROUTE MODEL BINDING
-        |--------------------------------------------------------------------------
-        */
-
-        foreach (
-            $method->getParameters()
-            as $param
-        ) {
-
-            $type =
-                $param->getType();
-
-            if (
-                $type &&
-                !$type->isBuiltin()
-            ) {
-
-                $className =
-                    $type->getName();
-
-                if (
-                    in_array(
-                        $className,
-                        $this->models
-                    )
-                ) {
-
-                    $foundModels[] =
-                        class_basename(
-                            $className
-                        );
-                }
-            }
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | SOURCE CODE
-        |--------------------------------------------------------------------------
-        */
-
-        $file =
-            $method->getFileName();
-
-        if (
-            $file &&
-            File::exists($file)
-        ) {
-
-            $start =
-                $method->getStartLine() - 1;
-
-            $length =
-                $method->getEndLine() -
-                $start;
-
-            $lines =
-                array_slice(
-                    file($file),
-                    $start,
-                    $length
-                );
-
-            $sourceCode =
-                implode(
-                    '',
-                    $lines
-                );
-
-            foreach (
-                $this->models
-                as $modelClass
-            ) {
-
-                $shortName =
-                    class_basename(
-                        $modelClass
-                    );
-
-                if (
-                    preg_match(
-                        '/\b' .
-                        preg_quote(
-                            $shortName,
-                            '/'
-                        ) .
-                        '::/',
-                        $sourceCode
-                    ) ||
-                    preg_match(
-                        '/\bnew\s+' .
-                        preg_quote(
-                            $shortName,
-                            '/'
-                        ) .
-                        '\b/',
-                        $sourceCode
-                    )
-                ) {
-
-                    $foundModels[] =
-                        $shortName;
-                }
-            }
-        }
-
-        $foundModels =
-            array_unique(
-                $foundModels
-            );
-
-        /*
-        |--------------------------------------------------------------------------
-        | OUTPUT
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            empty($foundModels)
-        ) {
-
-            $this->line(
-                '   Model:      ➖ Tidak menggunakan model'
-            );
-
-            return;
-        }
-
-        foreach (
-            $foundModels
-            as $modelName
-        ) {
-
-            $this->ok++;
-
-            $this->line(
-                "   Model:      ✅ {$modelName}"
-            );
-        }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | CONTROLLER RESPONSE CHECK
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkControllerResponse(
-        ReflectionMethod $method
-    ): void {
-
-        $file =
-            $method->getFileName();
-
-        if (
-            !$file ||
-            !File::exists($file)
-        ) {
-
-            $this->warning++;
-
-            $this->line(
-                '   Response:   ⚠️ Source tidak dapat dibaca'
-            );
-
-            return;
-        }
-
-        $start =
-            $method->getStartLine() - 1;
-
-        $length =
-            $method->getEndLine() -
-            $start;
-
-        $lines =
-            array_slice(
-                file($file),
-                $start,
-                $length
-            );
-
-        $source =
-            implode(
-                '',
-                $lines
-            );
-
-        $foundResponse =
-            false;
-
-        /*
-        |--------------------------------------------------------------------------
-        | RETURN VIEW
-        |--------------------------------------------------------------------------
-        */
-
-        preg_match_all(
-            "/return\s+view\(\s*['\"]([^'\"]+)['\"]/",
-            $source,
-            $viewMatches
-        );
-
-        foreach (
-            $viewMatches[1] ?? []
-            as $viewName
-        ) {
-
-            $foundResponse = true;
-
-            $this->checkView(
-                $viewName
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | RETURN REDIRECT ROUTE
-        |--------------------------------------------------------------------------
-        */
-
-        preg_match_all(
-            "/redirect\(\)\s*->\s*route\(\s*['\"]([^'\"]+)['\"]/",
-            $source,
-            $redirectMatches
-        );
-
-        foreach (
-            $redirectMatches[1] ?? []
-            as $routeName
-        ) {
-
-            $foundResponse = true;
-
-            $this->checkRedirectRoute(
-                $routeName
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | RETURN REDIRECT BACK
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            str_contains(
-                $source,
-                'redirect()->back()'
-            )
-        ) {
-
-            $foundResponse = true;
-
-            $this->ok++;
-
-            $this->line(
-                '   Redirect:   ✅ back()'
-            );
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | TIDAK ADA VIEW / REDIRECT
-        |--------------------------------------------------------------------------
-        */
-
-        if (!$foundResponse) {
-
-            $this->line(
-                '   Response:   ➖ Tidak ada return view/redirect yang terdeteksi'
-            );
-        }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | VIEW CHECK
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkView(
-        string $viewName
-    ): void {
-
-        $viewPath =
-            resource_path(
-                'views/' .
-                str_replace(
-                    '.',
-                    '/',
-                    $viewName
-                ) .
-                '.blade.php'
-            );
-
-        if (
-            File::exists($viewPath)
-        ) {
-
-            $this->ok++;
-
-            $relativePath =
-                'resources/views/' .
-                str_replace(
-                    '.',
-                    '/',
-                    $viewName
-                ) .
-                '.blade.php';
-
-            $this->line(
-                "   View:       ✅ {$viewName}"
-            );
-
-            $this->line(
-                "   File:       ✅ {$relativePath}"
-            );
-
-        } else {
-
-            /*
-            |----------------------------------------------------------------------
-            | View belum dibuat = WARNING
-            |---------------------------------------------------------------------- 
-            */
-
-            $this->warning++;
-
-            $relativePath =
-                'resources/views/' .
-                str_replace(
-                    '.',
-                    '/',
-                    $viewName
-                ) .
-                '.blade.php';
-
-            $this->line(
-                "   View:       ⚠️ {$viewName}"
-            );
-
-            $this->line(
-                "   File:       ⚠️ {$relativePath} belum ditemukan"
-            );
-        }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | REDIRECT ROUTE CHECK
-    |--------------------------------------------------------------------------
-    */
-
-    protected function checkRedirectRoute(
-        string $routeName
-    ): void {
-
-        $route =
-            Route::getRoutes()
-                ->getByName(
-                    $routeName
-                );
-
-        if ($route) {
-
-            $this->ok++;
-
-            $this->line(
-                "   Redirect:   ✅ route('{$routeName}')"
-            );
-
-            $this->line(
-                "      Target:  /{$route->uri()}"
-            );
-
-        } else {
-
-            $this->error++;
-
-            $this->line(
-                "   Redirect:   ❌ route('{$routeName}') tidak ditemukan"
-            );
-        }
     }
 
     /*
@@ -1427,7 +1167,7 @@ class ProjectCheck extends Command
 
     protected function summary(): void
     {
-        $this->info(
+        $this->line(
             '============================================================'
         );
 
@@ -1435,56 +1175,31 @@ class ProjectCheck extends Command
             'PROJECT CHECK SUMMARY'
         );
 
-        $this->info(
+        $this->line(
             '============================================================'
         );
 
-        $rootRoutesCount =
-            collect(Route::getRoutes())
-                ->filter(
-                    fn ($route) =>
-                    str_starts_with(
-                        ltrim(
-                            $route->uri(),
-                            '/'
-                        ),
-                        'root'
-                    )
-                )
-                ->count();
-
         $this->line(
-            'Model Terdaftar  : ' .
-            count($this->models)
+            'Modules Checked : ' .
+            count($this->modules)
         );
 
         $this->line(
-            'Root Routes      : ' .
-            $rootRoutesCount
-        );
-
-        $this->line(
-            '✅ OK             : ' .
+            '✅ OK           : ' .
             $this->ok
         );
 
         $this->line(
-            '⚠️ Warning        : ' .
+            '⚠️ Warning      : ' .
             $this->warning
         );
 
         $this->line(
-            '❌ Error          : ' .
+            '❌ Error        : ' .
             $this->error
         );
 
         $this->newLine();
-
-        /*
-        |--------------------------------------------------------------------------
-        | FINAL STATUS
-        |--------------------------------------------------------------------------
-        */
 
         if (
             $this->error === 0 &&
@@ -1500,13 +1215,13 @@ class ProjectCheck extends Command
         ) {
 
             $this->warn(
-                '⚠️ BACKEND TERHUBUNG. WARNING HANYA PADA BAGIAN YANG BELUM LENGKAP.'
+                '⚠️ BACKEND TERHUBUNG. MASIH ADA WARNING.'
             );
 
         } else {
 
             $this->error(
-                '❌ DITEMUKAN ERROR PADA STRUKTUR PROJECT.'
+                '❌ PROJECT BELUM LENGKAP.'
             );
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RegistrationStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,7 @@ class InternshipRegistration extends Model
     protected function casts(): array
     {
         return [
+            'status' => RegistrationStatus::class,
             'decided_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];

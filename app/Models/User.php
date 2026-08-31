@@ -22,6 +22,7 @@ class User extends Authenticatable
         'google_refresh_token',
         'google_token_expires_at',
         'google_token_scope',
+        'email_verified_at',
     ];
 
     protected $hidden = [

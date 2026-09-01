@@ -1,12 +1,29 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Intern\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
+
+
+
+
+
+Route::get('/yuhlez-magang', [HomeController::class, 'index'])
+    ->name('dashboard.index');
+
+// route ke intern
+Route::middleware(['auth'])->prefix('intern')->name('intern.')->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+});
 
 /*
 |--------------------------------------------------------------------------

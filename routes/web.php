@@ -6,9 +6,6 @@ use App\Http\Controllers\Intern\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
 
 
 
@@ -17,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/yuhlez-magang', [HomeController::class, 'index'])
     ->name('dashboard.index');
 
+// ruote magang
+Route::get('/magang', function () {
+    return view('magang.index');
+})->name('magang.index');
+
+// route detail magang (harus login)
+Route::get('/magang/{slug}', function ($slug) {
+
+    return redirect()->route('login', [
+        'redirect' => url()->current()
+    ]);
+
+})->name('magang.detail');
+
 // route ke intern
 Route::middleware(['auth'])->prefix('intern')->name('intern.')->group(function () {
 
@@ -24,6 +35,37 @@ Route::middleware(['auth'])->prefix('intern')->name('intern.')->group(function (
         ->name('dashboard');
 
 });
+
+// route login
+
+
+Route::get('/login', [GoogleAuthController::class, 'showLogin'])
+    ->name('login');
+
+Route::post('/login', [GoogleAuthController::class, 'login'])
+    ->name('login.process');
+
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])
+    ->name('google.redirect');
+
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])
+    ->name('google.callback');
+
+    
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
+
+// Route::post('/login', [GoogleAuthController::class, 'login'])
+//     ->name('login.store');
+
+
+// // Register
+// Route::get('/register', [GoogleAuthController::class, 'showRegister'])
+//     ->name('register');
+
+// Route::post('/register', [GoogleAuthController::class, 'register'])
+//     ->name('register.store');
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +78,10 @@ Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])
 
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])
     ->name('google.callback');
+
+// Logout
+Route::post('/logout', [GoogleAuthController::class, 'logout'])
+    ->name('logout');
 
 
 require __DIR__.'/root.php';

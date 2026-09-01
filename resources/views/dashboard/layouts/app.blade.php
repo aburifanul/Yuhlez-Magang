@@ -23,7 +23,8 @@
 
 @vite([
     'resources/css/dashboard.css',
-    'resources/js/dashboard.js'
+    'resources/js/dashboard.js',
+    'resource/css/auth.css'
 ])
 
 
@@ -58,7 +59,7 @@
 > 
  
  
-@stack('styles') 
+    @stack('styles') 
  
  
 </head> 

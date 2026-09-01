@@ -447,7 +447,7 @@
 
             {{-- BACK HOME --}}
             <a
-                href="{{ url('/') }}"
+                href="{{ url('/yuhlez-magang') }}"
                 class="back-home"
             >
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Intern\DashboardController;
+use App\Http\Controllers\Dashboard\MagangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +16,8 @@ Route::get('/yuhlez-magang', [HomeController::class, 'index'])
     ->name('dashboard.index');
 
 // ruote magang
-Route::get('/magang', function () {
-    return view('magang.index');
-})->name('magang.index');
+Route::get('/magang', [MagangController::class, 'index'])
+    ->name('magang.index');
 
 // route detail magang (harus login)
 Route::get('/magang/{slug}', function ($slug) {

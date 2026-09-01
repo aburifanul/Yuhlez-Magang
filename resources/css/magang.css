@@ -1,0 +1,1439 @@
+/* =========================================================
+   YUHLEZ MAGANG
+   PROGRAM MAGANG PAGE
+   Production Ready CSS
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --magang-yellow: #f6e12f;
+    --magang-yellow-hover: #e8d21b;
+    --magang-yellow-soft: #fffbea;
+
+    --magang-black: #111111;
+    --magang-black-soft: #1a1a1a;
+
+    --magang-text: #171717;
+    --magang-text-secondary: #667085;
+    --magang-text-muted: #98a2b3;
+
+    --magang-white: #ffffff;
+    --magang-bg: #f8fafc;
+    --magang-border: #e6e8ec;
+
+    --magang-green: #12b76a;
+    --magang-red: #f04438;
+
+    --magang-radius-sm: 10px;
+    --magang-radius-md: 14px;
+    --magang-radius-lg: 18px;
+    --magang-radius-xl: 24px;
+
+    --magang-shadow-sm:
+        0 4px 14px rgba(16, 24, 40, 0.05);
+
+    --magang-shadow-md:
+        0 12px 30px rgba(16, 24, 40, 0.07);
+
+    --magang-shadow-lg:
+        0 20px 50px rgba(16, 24, 40, 0.10);
+
+    --magang-transition:
+        180ms ease;
+}
+
+
+/* =========================================================
+   PAGE BASE
+========================================================= */
+
+.magang-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background: var(--magang-bg);
+    color: var(--magang-text);
+
+    font-family: 'Inter', sans-serif;
+
+    overflow-x: hidden;
+}
+
+.magang-page *,
+.magang-page *::before,
+.magang-page *::after {
+    box-sizing: border-box;
+}
+
+.magang-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.magang-page button,
+.magang-page input,
+.magang-page select {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.magang-container {
+    width: min(1180px, calc(100% - 48px));
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.magang-hero {
+    position: relative;
+
+    width: 100%;
+
+    padding: 72px 0 48px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 8% 25%,
+            rgba(246, 225, 47, 0.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 92% 15%,
+            rgba(246, 225, 47, 0.09),
+            transparent 30%
+        ),
+        #ffffff;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Decorative circles
+|--------------------------------------------------------------------------
+*/
+
+.magang-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    top: -220px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(246, 225, 47, 0.08);
+
+    pointer-events: none;
+}
+
+.magang-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    bottom: -150px;
+    left: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(246, 225, 47, 0.05);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.magang-hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 780px;
+}
+
+.magang-badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+    padding: 8px 13px;
+
+    border: 1px solid rgba(246, 225, 47, 0.35);
+
+    border-radius: 999px;
+
+    background: var(--magang-yellow-soft);
+    color: #8b7800;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+.magang-badge i {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.magang-hero h1 {
+    margin: 0;
+
+    max-width: 800px;
+
+    color: var(--magang-black);
+
+    font-size: clamp(38px, 5vw, 58px);
+
+    font-weight: 800;
+
+    line-height: 1.08;
+
+    letter-spacing: -2.2px;
+}
+
+.magang-hero h1 span {
+    color: var(--magang-yellow);
+}
+
+.magang-hero-description {
+    max-width: 720px;
+
+    margin: 20px 0 0;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 16px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   SEARCH WRAPPER
+========================================================= */
+
+.magang-search-wrapper {
+    position: relative;
+
+    z-index: 10;
+
+    margin-top: 34px;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.magang-search-box {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 70px;
+
+    padding: 10px;
+
+    gap: 10px;
+
+    border: 1px solid var(--magang-border);
+
+    border-radius: var(--magang-radius-lg);
+
+    background: var(--magang-white);
+
+    box-shadow: var(--magang-shadow-md);
+
+    transition:
+        border-color var(--magang-transition),
+        box-shadow var(--magang-transition);
+}
+
+.magang-search-box:focus-within {
+    border-color: rgba(246, 225, 47, 0.8);
+
+    box-shadow:
+        0 0 0 4px rgba(246, 225, 47, 0.10),
+        var(--magang-shadow-md);
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
+.magang-search-input {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 48px;
+
+    gap: 12px;
+
+    padding: 0 14px;
+
+    border-radius: var(--magang-radius-md);
+
+    background: #ffffff;
+}
+
+.magang-search-input i {
+    flex: 0 0 auto;
+
+    color: #667085;
+
+    font-size: 19px;
+}
+
+.magang-search-input input,
+.magang-search-box input[type="text"],
+.magang-search-box input[type="search"] {
+    width: 100%;
+    min-width: 0;
+
+    height: 48px;
+
+    padding: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--magang-text);
+
+    font-size: 14px;
+}
+
+.magang-search-input input::placeholder,
+.magang-search-box input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   SEARCH FILTER AREA
+========================================================= */
+
+.magang-search-filters {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Select
+|--------------------------------------------------------------------------
+*/
+
+.magang-search-filters select,
+.magang-search-box select,
+.magang-filter-select {
+    min-width: 155px;
+
+    height: 48px;
+
+    padding: 0 38px 0 14px;
+
+    border: 1px solid var(--magang-border);
+
+    border-radius: var(--magang-radius-md);
+
+    outline: none;
+
+    background-color: #ffffff;
+
+    color: var(--magang-text);
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #667085 50%),
+        linear-gradient(135deg, #667085 50%, transparent 50%);
+
+    background-position:
+        calc(100% - 17px) 20px,
+        calc(100% - 12px) 20px;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat: no-repeat;
+
+    transition:
+        border-color var(--magang-transition),
+        box-shadow var(--magang-transition);
+}
+
+.magang-search-filters select:hover,
+.magang-search-box select:hover {
+    border-color: #c9ced6;
+}
+
+.magang-search-filters select:focus,
+.magang-search-box select:focus {
+    border-color: var(--magang-yellow);
+
+    box-shadow:
+        0 0 0 3px rgba(246, 225, 47, 0.12);
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.magang-search-button {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 145px;
+
+    height: 48px;
+
+    padding: 0 20px;
+
+    border: 0;
+
+    border-radius: var(--magang-radius-md);
+
+    background: var(--magang-yellow);
+
+    color: var(--magang-black);
+
+    font-size: 13px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--magang-transition),
+        background var(--magang-transition),
+        box-shadow var(--magang-transition);
+}
+
+.magang-search-button:hover {
+    background: var(--magang-yellow-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(246, 225, 47, 0.22);
+}
+
+.magang-search-button:active {
+    transform: translateY(0);
+}
+
+.magang-search-button i {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.magang-content {
+    padding: 48px 0 80px;
+
+    background: var(--magang-bg);
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.magang-section-header {
+    margin-bottom: 26px;
+}
+
+.magang-section-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+}
+
+.magang-section-header h2 {
+    margin: 0;
+
+    color: var(--magang-black);
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.8px;
+
+    font-weight: 800;
+}
+
+.magang-section-header p {
+    margin: 8px 0 0;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.magang-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+.magang-result {
+    display: flex;
+    align-items: baseline;
+
+    gap: 7px;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 13px;
+}
+
+.magang-result strong {
+    color: var(--magang-black);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FILTER BUTTON
+========================================================= */
+
+.magang-filter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    height: 40px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--magang-border);
+
+    border-radius: var(--magang-radius-sm);
+
+    background: #ffffff;
+
+    color: var(--magang-text);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--magang-transition),
+        background var(--magang-transition);
+}
+
+.magang-filter-button:hover {
+    border-color: var(--magang-yellow);
+
+    background: var(--magang-yellow-soft);
+}
+
+.magang-filter-button i {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.magang-layout {
+    display: grid;
+
+    grid-template-columns: 235px minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 28px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.magang-sidebar {
+    position: sticky;
+
+    top: 100px;
+
+    width: 100%;
+
+    padding: 20px;
+
+    border: 1px solid var(--magang-border);
+
+    border-radius: var(--magang-radius-lg);
+
+    background: #ffffff;
+
+    box-shadow: var(--magang-shadow-sm);
+}
+
+
+/* =========================================================
+   FILTER GROUP
+========================================================= */
+
+.magang-filter-group {
+    padding-bottom: 20px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #edf0f3;
+}
+
+.magang-filter-group:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   FILTER TITLE
+========================================================= */
+
+.magang-filter-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+    color: var(--magang-black);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.magang-filter-title i {
+    color: #98a2b3;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FILTER OPTION
+========================================================= */
+
+.magang-filter-option {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 11px;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.magang-filter-option:last-child {
+    margin-bottom: 0;
+}
+
+.magang-filter-option input {
+    width: 15px;
+    height: 15px;
+
+    margin: 0;
+
+    accent-color: var(--magang-yellow);
+
+    cursor: pointer;
+}
+
+.magang-filter-option span {
+    transition: color var(--magang-transition);
+}
+
+.magang-filter-option:hover span {
+    color: var(--magang-black);
+}
+
+
+/* =========================================================
+   JOB GRID
+========================================================= */
+
+.magang-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   JOB CARD
+========================================================= */
+
+.magang-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    min-height: 300px;
+
+    padding: 21px;
+
+    border: 1px solid var(--magang-border);
+
+    border-radius: var(--magang-radius-lg);
+
+    background: #ffffff;
+
+    box-shadow: var(--magang-shadow-sm);
+
+    overflow: hidden;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.magang-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(246, 225, 47, 0.65);
+
+    box-shadow: var(--magang-shadow-md);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.magang-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 17px;
+}
+
+
+/* =========================================================
+   COMPANY LOGO
+========================================================= */
+
+.magang-company-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    font-size: 20px;
+}
+
+.magang-company-logo.purple {
+    background: #f3e8ff;
+    color: #9333ea;
+}
+
+.magang-company-logo.orange {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.magang-company-logo.green {
+    background: #ecfdf3;
+    color: #039855;
+}
+
+.magang-company-logo.blue {
+    background: #eff8ff;
+    color: #1570ef;
+}
+
+.magang-company-logo.red {
+    background: #fef3f2;
+    color: #d92d20;
+}
+
+
+/* =========================================================
+   BOOKMARK
+========================================================= */
+
+.magang-bookmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 36px;
+    height: 36px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #98a2b3;
+
+    cursor: pointer;
+
+    transition:
+        background var(--magang-transition),
+        color var(--magang-transition);
+}
+
+.magang-bookmark:hover {
+    background: var(--magang-yellow-soft);
+
+    color: #8b7800;
+}
+
+
+/* =========================================================
+   CARD LABEL
+========================================================= */
+
+.magang-label {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-bottom: 10px;
+
+    padding: 6px 9px;
+
+    border-radius: 7px;
+
+    background: var(--magang-yellow-soft);
+
+    color: #8b7800;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.magang-card h3 {
+    margin: 0 0 6px;
+
+    color: var(--magang-black);
+
+    font-size: 16px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+
+    letter-spacing: -0.2px;
+}
+
+.magang-company {
+    margin: 0;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CARD INFO
+========================================================= */
+
+.magang-info {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 9px 15px;
+
+    margin-top: 17px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #f0f2f5;
+}
+
+.magang-info span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+.magang-info i {
+    color: #98a2b3;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CARD BOTTOM
+========================================================= */
+
+.magang-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: auto;
+
+    padding-top: 20px;
+}
+
+.magang-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: var(--magang-green);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.magang-status::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+}
+
+.magang-detail {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: #8b7800;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition:
+        gap var(--magang-transition),
+        color var(--magang-transition);
+}
+
+.magang-detail:hover {
+    gap: 8px;
+
+    color: var(--magang-black);
+}
+
+.magang-detail i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.magang-empty {
+    grid-column: 1 / -1;
+
+    padding: 65px 30px;
+
+    text-align: center;
+
+    border: 1px dashed #d0d5dd;
+
+    border-radius: var(--magang-radius-lg);
+
+    background: #ffffff;
+}
+
+.magang-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 17px;
+
+    border-radius: 50%;
+
+    background: var(--magang-yellow-soft);
+
+    color: #8b7800;
+
+    font-size: 24px;
+}
+
+.magang-empty h3 {
+    margin: 0 0 7px;
+
+    color: var(--magang-black);
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.magang-empty p {
+    max-width: 430px;
+
+    margin: 0 auto;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.magang-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    margin-top: 35px;
+}
+
+.magang-pagination a,
+.magang-pagination span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--magang-border);
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: var(--magang-text-secondary);
+
+    font-size: 12px;
+
+    transition:
+        border-color var(--magang-transition),
+        background var(--magang-transition),
+        color var(--magang-transition);
+}
+
+.magang-pagination a:hover {
+    border-color: var(--magang-yellow);
+
+    background: var(--magang-yellow-soft);
+
+    color: var(--magang-black);
+}
+
+.magang-pagination .active {
+    border-color: var(--magang-yellow);
+
+    background: var(--magang-yellow);
+
+    color: var(--magang-black);
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .magang-container {
+        width: min(100% - 36px, 900px);
+    }
+
+    .magang-layout {
+        grid-template-columns: 210px minmax(0, 1fr);
+
+        gap: 20px;
+    }
+
+    .magang-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .magang-container {
+        width: calc(100% - 30px);
+    }
+
+    .magang-hero {
+        padding: 55px 0 38px;
+    }
+
+    .magang-hero h1 {
+        font-size: 38px;
+
+        letter-spacing: -1.3px;
+    }
+
+    .magang-hero-description {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    /* Search */
+
+    .magang-search-box {
+        display: flex;
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 10px;
+    }
+
+    .magang-search-input {
+        width: 100%;
+    }
+
+    .magang-search-filters {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        width: 100%;
+    }
+
+    .magang-search-filters select,
+    .magang-search-box select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .magang-search-button {
+        width: 100%;
+    }
+
+
+    /* Content */
+
+    .magang-content {
+        padding: 38px 0 60px;
+    }
+
+
+    /* Sidebar */
+
+    .magang-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .magang-sidebar {
+        display: none;
+    }
+
+
+    /* Topbar */
+
+    .magang-topbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .magang-filter-button {
+        width: 100%;
+    }
+
+
+    /* Cards */
+
+    .magang-grid {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .magang-container {
+        width: calc(100% - 24px);
+    }
+
+    .magang-hero {
+        padding: 42px 0 30px;
+    }
+
+    .magang-badge {
+        padding: 7px 11px;
+
+        font-size: 10px;
+    }
+
+    .magang-hero h1 {
+        font-size: 31px;
+
+        letter-spacing: -1px;
+    }
+
+    .magang-hero-description {
+        margin-top: 15px;
+
+        font-size: 13px;
+    }
+
+    .magang-search-wrapper {
+        margin-top: 25px;
+    }
+
+    .magang-search-box {
+        border-radius: 15px;
+    }
+
+    .magang-search-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .magang-search-input {
+        min-height: 46px;
+    }
+
+    .magang-search-input input {
+        font-size: 13px;
+    }
+
+    .magang-section-header h2 {
+        font-size: 25px;
+    }
+
+    .magang-section-header p {
+        font-size: 12px;
+    }
+
+    .magang-card {
+        min-height: 280px;
+
+        padding: 18px;
+    }
+
+    .magang-card h3 {
+        font-size: 15px;
+    }
+
+    .magang-card-bottom {
+        align-items: flex-start;
+    }
+
+    .magang-info {
+        gap: 8px 12px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .magang-container {
+        width: calc(100% - 20px);
+    }
+
+    .magang-hero h1 {
+        font-size: 28px;
+    }
+
+    .magang-card {
+        padding: 16px;
+    }
+
+    .magang-company-logo {
+        width: 44px;
+        height: 44px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.magang-page :focus-visible {
+    outline: 3px solid rgba(246, 225, 47, 0.45);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .magang-page *,
+    .magang-page *::before,
+    .magang-page *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+    }
+
+}

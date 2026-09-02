@@ -1,0 +1,1149 @@
+/* css tampilan perusahaan */
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.perusahaan-hero {
+    position: relative;
+    overflow: hidden;
+
+    padding: 95px 0 105px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(246, 225, 42, 0.16),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #fdfdfd 0%,
+            #ffffff 100%
+        );
+}
+
+
+.perusahaan-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    right: -180px;
+    top: -180px;
+
+    border-radius: 50%;
+
+    background: rgba(246, 225, 42, 0.08);
+}
+
+
+.perusahaan-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    left: -130px;
+    bottom: -120px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(246, 225, 42, 0.25);
+}
+
+
+.perusahaan-hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.perusahaan-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(246, 225, 42, 0.5);
+
+    border-radius: 999px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.perusahaan-hero-content h1 {
+    margin: 0 auto 22px;
+
+    max-width: 760px;
+
+    color: #070707;
+
+    font-size: clamp(40px, 5vw, 62px);
+
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+
+    font-weight: 800;
+}
+
+
+.perusahaan-hero-content h1 span {
+    display: block;
+
+    color: #070707;
+}
+
+
+.perusahaan-hero-content h1 span::after {
+    content: "";
+
+    display: block;
+
+    width: 110px;
+
+    height: 5px;
+
+    margin: 12px auto 0;
+
+    border-radius: 999px;
+
+    background: #f6e12a;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.perusahaan-hero-content p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   SEARCH SECTION
+========================================================= */
+
+.perusahaan-search-section {
+    position: relative;
+
+    padding: 0 0 80px;
+
+    background: #ffffff;
+}
+
+
+.perusahaan-search-card {
+    position: relative;
+
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns:
+        1.7fr
+        0.8fr
+        0.8fr
+        auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: -35px;
+
+    padding: 18px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    background: #fdfdfd;
+
+    box-shadow:
+        0 18px 45px rgba(7, 7, 7, 0.08);
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.perusahaan-search-box {
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 15px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    transition: 0.25s ease;
+}
+
+
+.perusahaan-search-box:focus-within {
+    border-color: #f6e12a;
+
+    box-shadow:
+        0 0 0 3px rgba(246, 225, 42, 0.15);
+}
+
+
+.perusahaan-search-box i {
+    color: #070707;
+
+    font-size: 16px;
+}
+
+
+.perusahaan-search-box input {
+    width: 100%;
+
+    height: 100%;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: #070707;
+
+    font-size: 13px;
+}
+
+
+.perusahaan-search-box input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.perusahaan-filter {
+    height: 52px;
+}
+
+
+.perusahaan-filter select {
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0 14px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.perusahaan-filter select:focus {
+    border-color: #f6e12a;
+
+    box-shadow:
+        0 0 0 3px rgba(246, 225, 42, 0.15);
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.perusahaan-search-button {
+    height: 52px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.perusahaan-search-button:hover {
+    background: #070707;
+
+    color: #f6e12a;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MAIN SECTION
+========================================================= */
+
+.perusahaan-section {
+    padding: 90px 0;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.perusahaan-section-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 35px;
+}
+
+
+.perusahaan-section-heading > div:first-child {
+    max-width: 650px;
+}
+
+
+.perusahaan-section-heading > div:first-child > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #070707;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.perusahaan-section-heading h2 {
+    margin: 0;
+
+    color: #070707;
+
+    font-size: clamp(27px, 3vw, 36px);
+
+    line-height: 1.2;
+
+    letter-spacing: -0.8px;
+
+    font-weight: 800;
+}
+
+
+.perusahaan-section-heading p {
+    margin-top: 9px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.perusahaan-result {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #fdfdfd;
+
+    white-space: nowrap;
+}
+
+
+.perusahaan-result strong {
+    color: #070707;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+.perusahaan-result span {
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.perusahaan-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.perusahaan-card {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 23px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 17px;
+
+    background: #fdfdfd;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.perusahaan-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(246, 225, 42, 0.7);
+
+    box-shadow:
+        0 18px 40px rgba(7, 7, 7, 0.09);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.perusahaan-card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 19px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.perusahaan-logo {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    font-size: 19px;
+}
+
+
+.perusahaan-logo.yellow {
+    background: #f6e12a;
+
+    color: #070707;
+}
+
+
+.perusahaan-logo.black {
+    background: #070707;
+
+    color: #f6e12a;
+}
+
+
+/* =========================================================
+   BOOKMARK
+========================================================= */
+
+.perusahaan-bookmark {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #94a3b8;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.perusahaan-bookmark:hover {
+    background: #f6e12a;
+
+    border-color: #f6e12a;
+
+    color: #070707;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.perusahaan-category {
+    align-self: flex-start;
+
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background: #fffce0;
+
+    color: #070707;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.perusahaan-card h3 {
+    min-height: 22px;
+
+    margin: 0 0 10px;
+
+    color: #070707;
+
+    font-size: 16px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.perusahaan-description {
+    min-height: 58px;
+
+    margin: 0 0 18px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.perusahaan-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.perusahaan-info span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+.perusahaan-info i {
+    color: #070707;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CARD BOTTOM
+========================================================= */
+
+.perusahaan-card-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-top: 15px;
+}
+
+
+.perusahaan-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #64748b;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+}
+
+
+.perusahaan-status i {
+    color: #f6e12a;
+
+    font-size: 7px;
+}
+
+
+.perusahaan-detail-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 8px 10px;
+
+    border-radius: 7px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+
+.perusahaan-detail-button:hover {
+    background: #070707;
+
+    color: #f6e12a;
+
+    transform: translateX(2px);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.perusahaan-empty {
+    grid-column: 1 / -1;
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+    border: 1px dashed #d9dee7;
+
+    border-radius: 18px;
+
+    background: #fdfdfd;
+}
+
+
+.perusahaan-empty-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border-radius: 18px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 27px;
+}
+
+
+.perusahaan-empty h3 {
+    margin-bottom: 8px;
+
+    color: #070707;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.perusahaan-empty p {
+    max-width: 450px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.perusahaan-cta-section {
+    padding: 30px 0 90px;
+
+    background: #f8fafc;
+}
+
+
+.perusahaan-cta {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 55px 60px;
+
+    border-radius: 22px;
+
+    background: #070707;
+}
+
+
+.perusahaan-cta::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -120px;
+    top: -150px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(246, 225, 42, 0.25);
+}
+
+
+.perusahaan-cta-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.perusahaan-cta-content > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #f6e12a;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.perusahaan-cta-content h2 {
+    margin: 0;
+
+    color: #fdfdfd;
+
+    font-size: clamp(25px, 3vw, 36px);
+
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.perusahaan-cta-content p {
+    max-width: 600px;
+
+    margin-top: 10px;
+
+    color: #a1a1aa;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.perusahaan-cta-button {
+    position: relative;
+
+    z-index: 2;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+
+.perusahaan-cta-button:hover {
+    background: #fdfdfd;
+
+    color: #070707;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .perusahaan-search-card {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .perusahaan-search-box {
+        grid-column: 1 / -1;
+    }
+
+
+    .perusahaan-search-button {
+        width: 100%;
+    }
+
+
+    .perusahaan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .perusahaan-hero {
+        padding: 65px 0 75px;
+    }
+
+
+    .perusahaan-hero-content h1 {
+        font-size: 40px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .perusahaan-hero-content p {
+        font-size: 13px;
+    }
+
+
+    .perusahaan-search-section {
+        padding-bottom: 60px;
+    }
+
+
+    .perusahaan-search-card {
+        grid-template-columns: 1fr;
+
+        margin-top: -25px;
+
+        padding: 15px;
+    }
+
+
+    .perusahaan-search-box {
+        grid-column: auto;
+    }
+
+
+    .perusahaan-search-button {
+        width: 100%;
+    }
+
+
+    .perusahaan-section {
+        padding: 70px 0;
+    }
+
+
+    .perusahaan-section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        margin-bottom: 28px;
+    }
+
+
+    .perusahaan-result {
+        align-self: flex-start;
+    }
+
+
+    .perusahaan-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .perusahaan-card {
+        padding: 20px;
+    }
+
+
+    .perusahaan-cta {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 35px 25px;
+
+        gap: 25px;
+    }
+
+
+    .perusahaan-cta-button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .perusahaan-hero-content h1 {
+        font-size: 34px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .perusahaan-hero-content p {
+        font-size: 12px;
+    }
+
+
+    .perusahaan-eyebrow {
+        font-size: 9px;
+    }
+
+
+    .perusahaan-card-bottom {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .perusahaan-detail-button {
+        width: 100%;
+    }
+
+
+    .perusahaan-cta-content h2 {
+        font-size: 26px;
+    }
+
+}

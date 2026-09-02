@@ -1,0 +1,1260 @@
+/* css magang */
+
+
+/* =========================================================
+   RESET KHUSUS MAGANG
+========================================================= */
+
+.magang-hero *,
+.magang-search-section *,
+.magang-program-section *,
+.magang-cta-section * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.magang-hero {
+    position: relative;
+    overflow: hidden;
+
+    padding: 95px 0 105px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(246, 225, 42, 0.16),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #fdfdfd 0%,
+            #ffffff 100%
+        );
+}
+
+
+/* Decorative circle */
+
+.magang-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    right: -180px;
+    top: -180px;
+
+    border-radius: 50%;
+
+    background: rgba(246, 225, 42, 0.08);
+
+    pointer-events: none;
+}
+
+
+.magang-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    left: -130px;
+    bottom: -120px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(246, 225, 42, 0.25);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.magang-hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+.magang-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(246, 225, 42, 0.5);
+
+    border-radius: 999px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.magang-eyebrow i {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.magang-hero-content h1 {
+    margin: 0 auto 22px;
+
+    max-width: 760px;
+
+    color: #070707;
+
+    font-size: clamp(40px, 5vw, 62px);
+
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+
+    font-weight: 800;
+}
+
+
+.magang-hero-content h1 span {
+    display: block;
+
+    color: #070707;
+
+    position: relative;
+}
+
+
+/* Yellow underline */
+
+.magang-hero-content h1 span::after {
+    content: "";
+
+    display: block;
+
+    width: 110px;
+    height: 5px;
+
+    margin: 12px auto 0;
+
+    border-radius: 999px;
+
+    background: #f6e12a;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.magang-hero-content p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   SEARCH SECTION
+========================================================= */
+
+.magang-search-section {
+    position: relative;
+
+    padding: 0 0 80px;
+
+    background: #ffffff;
+}
+
+
+.magang-search-card {
+    position: relative;
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns: 1.7fr 0.8fr 0.8fr auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: -35px;
+
+    padding: 18px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    background: #fdfdfd;
+
+    box-shadow:
+        0 18px 45px rgba(7, 7, 7, 0.08);
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
+.magang-search-box {
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 15px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    transition: 0.25s ease;
+}
+
+
+.magang-search-box:focus-within {
+    border-color: #f6e12a;
+
+    box-shadow:
+        0 0 0 3px rgba(246, 225, 42, 0.15);
+}
+
+
+.magang-search-box i {
+    color: #070707;
+
+    font-size: 16px;
+}
+
+
+.magang-search-box input {
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0;
+
+    border: 0;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #070707;
+
+    font-size: 13px;
+}
+
+
+.magang-search-box input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.magang-filter {
+    height: 52px;
+}
+
+
+.magang-filter select {
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0 14px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.magang-filter select:focus {
+    border-color: #f6e12a;
+
+    box-shadow:
+        0 0 0 3px rgba(246, 225, 42, 0.15);
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.magang-search-button {
+    height: 52px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.magang-search-button:hover {
+    background: #070707;
+
+    color: #f6e12a;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(7, 7, 7, 0.15);
+}
+
+
+/* =========================================================
+   PROGRAM SECTION
+========================================================= */
+
+.magang-program-section {
+    padding: 90px 0;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.magang-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 35px;
+}
+
+
+.magang-section-heading > div:first-child {
+    max-width: 650px;
+}
+
+
+.magang-section-heading > div:first-child > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #070707;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.magang-section-heading h2 {
+    margin: 0;
+
+    color: #070707;
+
+    font-size: clamp(27px, 3vw, 36px);
+
+    line-height: 1.2;
+
+    letter-spacing: -0.8px;
+
+    font-weight: 800;
+}
+
+
+.magang-section-heading p {
+    margin-top: 9px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.magang-result {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #fdfdfd;
+
+    white-space: nowrap;
+}
+
+
+.magang-result strong {
+    color: #070707;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+.magang-result span {
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   MAGANG GRID
+========================================================= */
+
+.magang-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   MAGANG CARD
+========================================================= */
+
+.magang-card {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 22px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 17px;
+
+    background: #fdfdfd;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.magang-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(246, 225, 42, 0.7);
+
+    box-shadow:
+        0 18px 40px rgba(7, 7, 7, 0.09);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.magang-card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 19px;
+}
+
+
+/* =========================================================
+   COMPANY LOGO
+========================================================= */
+
+.magang-company-logo {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 18px;
+}
+
+
+.magang-card:nth-child(2n) .magang-company-logo {
+    background: #070707;
+
+    color: #f6e12a;
+}
+
+
+.magang-card:nth-child(3n) .magang-company-logo {
+    background: #fdfdfd;
+
+    color: #070707;
+
+    border: 2px solid #f6e12a;
+}
+
+
+/* =========================================================
+   BOOKMARK
+========================================================= */
+
+.magang-bookmark {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.magang-bookmark:hover {
+    border-color: #f6e12a;
+
+    background: #f6e12a;
+
+    color: #070707;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.magang-category {
+    display: inline-block;
+
+    align-self: flex-start;
+
+    margin-bottom: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background: #fffce0;
+
+    color: #070707;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.magang-card:nth-child(2n) .magang-category {
+    background: #070707;
+
+    color: #f6e12a;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.magang-card h3 {
+    min-height: 44px;
+
+    margin: 0 0 7px;
+
+    color: #070707;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.magang-company {
+    min-height: 20px;
+
+    margin: 0 0 18px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.magang-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.magang-info span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+.magang-info i {
+    color: #070707;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CARD BOTTOM
+========================================================= */
+
+.magang-card-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-top: 15px;
+}
+
+
+.magang-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #64748b;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+}
+
+
+.magang-status i {
+    color: #f6e12a;
+
+    font-size: 7px;
+}
+
+
+.magang-detail-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+
+.magang-detail-button:hover {
+    background: #070707;
+
+    color: #f6e12a;
+
+    transform: translateX(2px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.magang-empty {
+    grid-column: 1 / -1;
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+    border: 1px dashed #d9dee7;
+
+    border-radius: 18px;
+
+    background: #fdfdfd;
+}
+
+
+.magang-empty-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border-radius: 18px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 27px;
+}
+
+
+.magang-empty h3 {
+    margin-bottom: 8px;
+
+    color: #070707;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.magang-empty p {
+    max-width: 450px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.magang-cta-section {
+    padding: 30px 0 90px;
+
+    background: #f8fafc;
+}
+
+
+.magang-cta {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 55px 60px;
+
+    border-radius: 22px;
+
+    background: #070707;
+}
+
+
+/* CTA decorative circle */
+
+.magang-cta::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -120px;
+    top: -150px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(246, 225, 42, 0.25);
+}
+
+
+.magang-cta::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    left: -90px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(246, 225, 42, 0.06);
+}
+
+
+.magang-cta-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.magang-cta-content > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #f6e12a;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.magang-cta-content h2 {
+    margin: 0;
+
+    color: #fdfdfd;
+
+    font-size: clamp(25px, 3vw, 36px);
+
+    line-height: 1.2;
+
+    letter-spacing: -0.7px;
+
+    font-weight: 800;
+}
+
+
+.magang-cta-content p {
+    max-width: 600px;
+
+    margin-top: 10px;
+
+    color: #a1a1aa;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.magang-cta-button {
+    position: relative;
+
+    z-index: 2;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    background: #f6e12a;
+
+    color: #070707;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+
+.magang-cta-button:hover {
+    background: #fdfdfd;
+
+    color: #070707;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(246, 225, 42, 0.18);
+}
+
+
+/* =========================================================
+   SEARCH FILTER ANIMATION
+========================================================= */
+
+.magang-card {
+    animation: magangCardIn 0.35s ease both;
+}
+
+
+@keyframes magangCardIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .magang-search-card {
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    .magang-search-box {
+        grid-column: 1 / -1;
+    }
+
+    .magang-search-button {
+        width: 100%;
+    }
+
+    .magang-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET SMALL
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .magang-hero {
+        padding: 80px 0 90px;
+    }
+
+
+    .magang-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .magang-cta {
+        padding: 45px 40px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .magang-hero {
+        padding: 65px 0 75px;
+    }
+
+
+    .magang-hero-content h1 {
+        font-size: 40px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .magang-hero-content p {
+        font-size: 13px;
+    }
+
+
+    .magang-search-section {
+        padding-bottom: 60px;
+    }
+
+
+    .magang-search-card {
+        grid-template-columns: 1fr;
+
+        margin-top: -25px;
+
+        padding: 15px;
+    }
+
+
+    .magang-search-box {
+        grid-column: auto;
+    }
+
+
+    .magang-filter {
+        width: 100%;
+    }
+
+
+    .magang-search-button {
+        width: 100%;
+    }
+
+
+    .magang-program-section {
+        padding: 70px 0;
+    }
+
+
+    .magang-section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        margin-bottom: 28px;
+    }
+
+
+    .magang-result {
+        align-self: flex-start;
+    }
+
+
+    .magang-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .magang-card {
+        padding: 20px;
+    }
+
+
+    .magang-cta-section {
+        padding-bottom: 70px;
+    }
+
+
+    .magang-cta {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 35px 25px;
+
+        gap: 25px;
+    }
+
+
+    .magang-cta-button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .magang-hero-content h1 {
+        font-size: 34px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .magang-hero-content p {
+        font-size: 12px;
+    }
+
+
+    .magang-eyebrow {
+        font-size: 9px;
+    }
+
+
+    .magang-card-bottom {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .magang-detail-button {
+        width: 100%;
+    }
+
+
+    .magang-cta-content h2 {
+        font-size: 26px;
+    }
+
+}

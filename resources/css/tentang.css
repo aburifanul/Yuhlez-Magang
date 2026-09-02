@@ -1,0 +1,683 @@
+/* =========================================================
+TENTANG - HERO
+========================================================= */
+
+.tentang-hero {
+    padding: 95px 0 105px;
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(246, 225, 42, 0.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #070707 0%,
+            #111111 100%
+        );
+}
+
+.tentang-hero-content {
+    max-width: 800px;
+}
+
+.tentang-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 22px;
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: #f6e12a;
+    color: #070707;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.tentang-hero h1 {
+    margin-bottom: 25px;
+
+    color: #fdfdfd;
+
+    font-size: clamp(40px, 5vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    font-weight: 800;
+}
+
+.tentang-hero h1 span {
+    display: block;
+    color: #f6e12a;
+}
+
+.tentang-hero p {
+    max-width: 680px;
+
+    color: #c5c5c5;
+
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+INTRO
+========================================================= */
+
+.tentang-intro {
+    padding: 100px 0;
+    background: #fdfdfd;
+}
+
+.tentang-intro-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.tentang-intro-visual {
+    position: relative;
+
+    min-height: 390px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tentang-main-card {
+    width: 260px;
+    height: 260px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 30px;
+
+    background: #070707;
+
+    box-shadow:
+        0 30px 70px rgba(7, 7, 7, 0.20);
+}
+
+.tentang-card-icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 22px;
+
+    background: #f6e12a;
+    color: #070707;
+
+    font-size: 28px;
+}
+
+.tentang-main-card strong {
+    color: #fdfdfd;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.tentang-main-card span {
+    margin-top: 5px;
+
+    color: #f6e12a;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.tentang-floating-card {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    box-shadow: 0 15px 35px rgba(7, 7, 7, 0.09);
+}
+
+.tentang-floating-card > i {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f6e12a;
+    color: #070707;
+}
+
+.tentang-floating-card strong,
+.tentang-floating-card span {
+    display: block;
+}
+
+.tentang-floating-card strong {
+    color: #070707;
+    font-size: 11px;
+}
+
+.tentang-floating-card span {
+    color: #777777;
+    font-size: 9px;
+}
+
+.tentang-floating-one {
+    top: 30px;
+    right: 5px;
+}
+
+.tentang-floating-two {
+    bottom: 50px;
+    left: 0;
+}
+
+.tentang-floating-three {
+    right: -5px;
+    bottom: 15px;
+}
+
+.tentang-intro-content {
+    max-width: 620px;
+}
+
+.tentang-label,
+.tentang-section-heading > span,
+.tentang-cta span {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #070707;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.tentang-intro-content h2,
+.tentang-section-heading h2 {
+    margin-bottom: 20px;
+
+    color: #070707;
+
+    font-size: clamp(27px, 3vw, 39px);
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.tentang-intro-content p {
+    margin-bottom: 17px;
+
+    color: #666666;
+
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+VISI MISI
+========================================================= */
+
+.tentang-visi-misi {
+    padding: 95px 0;
+
+    background: #f6f6f6;
+}
+
+.tentang-section-heading {
+    max-width: 700px;
+    margin-bottom: 40px;
+}
+
+.tentang-section-heading > span {
+    color: #777777;
+}
+
+.tentang-section-heading p {
+    max-width: 650px;
+
+    color: #777777;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.tentang-visi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.tentang-visi-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+
+    padding: 30px;
+
+    border: 1px solid #e6e6e6;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    transition: 0.25s ease;
+}
+
+.tentang-visi-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #f6e12a;
+
+    box-shadow: 0 15px 35px rgba(7, 7, 7, 0.07);
+}
+
+.tentang-visi-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    background: #f6e12a;
+    color: #070707;
+
+    font-size: 20px;
+}
+
+.tentang-visi-card span {
+    color: #888888;
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.tentang-visi-card h3 {
+    margin: 6px 0 10px;
+
+    color: #070707;
+
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.tentang-visi-card p {
+    color: #777777;
+
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+FEATURE
+========================================================= */
+
+.tentang-feature-section {
+    padding: 100px 0;
+
+    background: #fdfdfd;
+}
+
+.tentang-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.tentang-feature-card {
+    padding: 25px;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    transition: 0.25s ease;
+}
+
+.tentang-feature-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #f6e12a;
+
+    box-shadow: 0 15px 35px rgba(7, 7, 7, 0.07);
+}
+
+.tentang-feature-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    background: #f6e12a;
+    color: #070707;
+
+    font-size: 18px;
+}
+
+.tentang-feature-card h3 {
+    margin-bottom: 8px;
+
+    color: #070707;
+
+    font-size: 14px;
+}
+
+.tentang-feature-card p {
+    color: #777777;
+
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+HOW IT WORKS
+========================================================= */
+
+.tentang-how-section {
+    padding: 100px 0;
+
+    background: #f6f6f6;
+}
+
+.tentang-step-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.tentang-step {
+    position: relative;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+}
+
+.tentang-step-number {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+
+    color: #dddddd;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.tentang-step-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 13px;
+
+    background: #070707;
+    color: #f6e12a;
+
+    font-size: 19px;
+}
+
+.tentang-step h3 {
+    margin-bottom: 8px;
+
+    color: #070707;
+
+    font-size: 14px;
+}
+
+.tentang-step p {
+    color: #777777;
+
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+CTA
+========================================================= */
+
+.tentang-cta-section {
+    padding: 30px 0 90px;
+
+    background: #f6f6f6;
+}
+
+.tentang-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    padding: 55px 60px;
+
+    border-radius: 22px;
+
+    background: #070707;
+}
+
+.tentang-cta span {
+    color: #f6e12a;
+}
+
+.tentang-cta h2 {
+    margin-bottom: 8px;
+
+    color: #fdfdfd;
+
+    font-size: clamp(25px, 3vw, 35px);
+    line-height: 1.2;
+}
+
+.tentang-cta p {
+    max-width: 600px;
+
+    color: #999999;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.tentang-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    background: #f6e12a;
+    color: #070707;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+.tentang-cta-button:hover {
+    transform: translateY(-2px);
+
+    background: #fdfdfd;
+}
+
+
+/* =========================================================
+RESPONSIVE TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .tentang-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .tentang-intro-visual {
+        max-width: 600px;
+    }
+
+    .tentang-feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tentang-step-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+RESPONSIVE MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .tentang-hero {
+        padding: 70px 0 75px;
+    }
+
+    .tentang-hero h1 {
+        font-size: 40px;
+        letter-spacing: -1.5px;
+    }
+
+    .tentang-intro,
+    .tentang-visi-misi,
+    .tentang-feature-section,
+    .tentang-how-section {
+        padding: 70px 0;
+    }
+
+    .tentang-intro-visual {
+        min-height: 350px;
+    }
+
+    .tentang-main-card {
+        width: 230px;
+        height: 230px;
+    }
+
+    .tentang-floating-one {
+        right: -5px;
+    }
+
+    .tentang-floating-two {
+        left: -5px;
+    }
+
+    .tentang-floating-three {
+        right: -10px;
+    }
+
+    .tentang-visi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tentang-feature-grid,
+    .tentang-step-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tentang-cta {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 35px 25px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .tentang-hero h1 {
+        font-size: 34px;
+    }
+
+    .tentang-intro-visual {
+        min-height: 320px;
+    }
+
+    .tentang-main-card {
+        width: 205px;
+        height: 205px;
+    }
+
+    .tentang-floating-card {
+        transform: scale(0.85);
+    }
+
+    .tentang-floating-one {
+        right: -30px;
+    }
+
+    .tentang-floating-two {
+        left: -30px;
+    }
+
+    .tentang-floating-three {
+        right: -35px;
+    }
+
+    .tentang-visi-card {
+        padding: 22px;
+    }
+
+}

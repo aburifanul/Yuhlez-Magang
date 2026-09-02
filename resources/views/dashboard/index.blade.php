@@ -43,7 +43,7 @@
 
                 {{-- KE PERUSAHAAN --}}
                 <a
-                    href="{{ url('/') }}#perusahaan"
+                    href="{{ url('perusahaan') }}#perusahaan"
                     class="dashboard-btn-primary"
                 >
                     <i class="bi bi-search"></i>

@@ -1,23 +1,11 @@
-/* css magang */
-
-
-/* =========================================================
-   RESET KHUSUS MAGANG
-========================================================= */
-
-.magang-hero *,
-.magang-search-section *,
-.magang-program-section *,
-.magang-cta-section * {
-    box-sizing: border-box;
-}
+/* css tampilan perusahaan */
 
 
 /* =========================================================
    HERO
 ========================================================= */
 
-.magang-hero {
+.perusahaan-hero {
     position: relative;
     overflow: hidden;
 
@@ -37,9 +25,7 @@
 }
 
 
-/* Decorative circle */
-
-.magang-hero::before {
+.perusahaan-hero::before {
     content: "";
 
     position: absolute;
@@ -53,12 +39,10 @@
     border-radius: 50%;
 
     background: rgba(246, 225, 42, 0.08);
-
-    pointer-events: none;
 }
 
 
-.magang-hero::after {
+.perusahaan-hero::after {
     content: "";
 
     position: absolute;
@@ -72,17 +56,12 @@
     border-radius: 50%;
 
     border: 1px solid rgba(246, 225, 42, 0.25);
-
-    pointer-events: none;
 }
 
 
-/* =========================================================
-   HERO CONTENT
-========================================================= */
-
-.magang-hero-content {
+.perusahaan-hero-content {
     position: relative;
+
     z-index: 2;
 
     max-width: 760px;
@@ -93,9 +72,15 @@
 }
 
 
-.magang-eyebrow {
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.perusahaan-eyebrow {
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 8px;
@@ -113,14 +98,10 @@
     color: #070707;
 
     font-size: 11px;
+
     font-weight: 800;
 
     letter-spacing: 1px;
-}
-
-
-.magang-eyebrow i {
-    font-size: 13px;
 }
 
 
@@ -128,7 +109,7 @@
    HERO TITLE
 ========================================================= */
 
-.magang-hero-content h1 {
+.perusahaan-hero-content h1 {
     margin: 0 auto 22px;
 
     max-width: 760px;
@@ -145,23 +126,20 @@
 }
 
 
-.magang-hero-content h1 span {
+.perusahaan-hero-content h1 span {
     display: block;
 
     color: #070707;
-
-    position: relative;
 }
 
 
-/* Yellow underline */
-
-.magang-hero-content h1 span::after {
+.perusahaan-hero-content h1 span::after {
     content: "";
 
     display: block;
 
     width: 110px;
+
     height: 5px;
 
     margin: 12px auto 0;
@@ -176,7 +154,7 @@
    HERO DESCRIPTION
 ========================================================= */
 
-.magang-hero-content p {
+.perusahaan-hero-content p {
     max-width: 650px;
 
     margin: 0 auto;
@@ -193,7 +171,7 @@
    SEARCH SECTION
 ========================================================= */
 
-.magang-search-section {
+.perusahaan-search-section {
     position: relative;
 
     padding: 0 0 80px;
@@ -202,13 +180,18 @@
 }
 
 
-.magang-search-card {
+.perusahaan-search-card {
     position: relative;
+
     z-index: 5;
 
     display: grid;
 
-    grid-template-columns: 1.7fr 0.8fr 0.8fr auto;
+    grid-template-columns:
+        1.7fr
+        0.8fr
+        0.8fr
+        auto;
 
     align-items: center;
 
@@ -230,13 +213,14 @@
 
 
 /* =========================================================
-   SEARCH INPUT
+   SEARCH BOX
 ========================================================= */
 
-.magang-search-box {
+.perusahaan-search-box {
     height: 52px;
 
     display: flex;
+
     align-items: center;
 
     gap: 10px;
@@ -253,7 +237,7 @@
 }
 
 
-.magang-search-box:focus-within {
+.perusahaan-search-box:focus-within {
     border-color: #f6e12a;
 
     box-shadow:
@@ -261,23 +245,21 @@
 }
 
 
-.magang-search-box i {
+.perusahaan-search-box i {
     color: #070707;
 
     font-size: 16px;
 }
 
 
-.magang-search-box input {
+.perusahaan-search-box input {
     width: 100%;
 
     height: 100%;
 
-    padding: 0;
-
     border: 0;
 
-    outline: none;
+    outline: 0;
 
     background: transparent;
 
@@ -287,7 +269,7 @@
 }
 
 
-.magang-search-box input::placeholder {
+.perusahaan-search-box input::placeholder {
     color: #94a3b8;
 }
 
@@ -296,12 +278,12 @@
    FILTER
 ========================================================= */
 
-.magang-filter {
+.perusahaan-filter {
     height: 52px;
 }
 
 
-.magang-filter select {
+.perusahaan-filter select {
     width: 100%;
 
     height: 100%;
@@ -328,7 +310,7 @@
 }
 
 
-.magang-filter select:focus {
+.perusahaan-filter select:focus {
     border-color: #f6e12a;
 
     box-shadow:
@@ -340,11 +322,13 @@
    SEARCH BUTTON
 ========================================================= */
 
-.magang-search-button {
+.perusahaan-search-button {
     height: 52px;
 
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 8px;
@@ -371,23 +355,20 @@
 }
 
 
-.magang-search-button:hover {
+.perusahaan-search-button:hover {
     background: #070707;
 
     color: #f6e12a;
 
     transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(7, 7, 7, 0.15);
 }
 
 
 /* =========================================================
-   PROGRAM SECTION
+   MAIN SECTION
 ========================================================= */
 
-.magang-program-section {
+.perusahaan-section {
     padding: 90px 0;
 
     background: #f8fafc;
@@ -398,9 +379,11 @@
    SECTION HEADING
 ========================================================= */
 
-.magang-section-heading {
+.perusahaan-section-heading {
     display: flex;
+
     align-items: flex-end;
+
     justify-content: space-between;
 
     gap: 25px;
@@ -409,12 +392,12 @@
 }
 
 
-.magang-section-heading > div:first-child {
+.perusahaan-section-heading > div:first-child {
     max-width: 650px;
 }
 
 
-.magang-section-heading > div:first-child > span {
+.perusahaan-section-heading > div:first-child > span {
     display: block;
 
     margin-bottom: 8px;
@@ -429,7 +412,7 @@
 }
 
 
-.magang-section-heading h2 {
+.perusahaan-section-heading h2 {
     margin: 0;
 
     color: #070707;
@@ -444,7 +427,7 @@
 }
 
 
-.magang-section-heading p {
+.perusahaan-section-heading p {
     margin-top: 9px;
 
     color: #64748b;
@@ -457,7 +440,7 @@
    RESULT
 ========================================================= */
 
-.magang-result {
+.perusahaan-result {
     display: flex;
 
     align-items: center;
@@ -476,7 +459,7 @@
 }
 
 
-.magang-result strong {
+.perusahaan-result strong {
     color: #070707;
 
     font-size: 16px;
@@ -485,42 +468,38 @@
 }
 
 
-.magang-result span {
+.perusahaan-result span {
     color: #64748b;
 
     font-size: 10px;
-
-    font-weight: 500;
 }
 
 
 /* =========================================================
-   MAGANG GRID
+   GRID
 ========================================================= */
 
-.magang-grid {
+.perusahaan-grid {
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 18px;
 }
 
 
 /* =========================================================
-   MAGANG CARD
+   CARD
 ========================================================= */
 
-.magang-card {
-    position: relative;
-
+.perusahaan-card {
     display: flex;
 
     flex-direction: column;
 
     min-width: 0;
 
-    padding: 22px;
+    padding: 23px;
 
     border: 1px solid #e5e7eb;
 
@@ -535,7 +514,7 @@
 }
 
 
-.magang-card:hover {
+.perusahaan-card:hover {
     transform: translateY(-5px);
 
     border-color: rgba(246, 225, 42, 0.7);
@@ -549,7 +528,7 @@
    CARD TOP
 ========================================================= */
 
-.magang-card-top {
+.perusahaan-card-top {
     display: flex;
 
     align-items: center;
@@ -561,40 +540,36 @@
 
 
 /* =========================================================
-   COMPANY LOGO
+   LOGO
 ========================================================= */
 
-.magang-company-logo {
-    width: 46px;
-    height: 46px;
+.perusahaan-logo {
+    width: 48px;
+    height: 48px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    border-radius: 12px;
+    border-radius: 13px;
 
+    font-size: 19px;
+}
+
+
+.perusahaan-logo.yellow {
     background: #f6e12a;
 
     color: #070707;
-
-    font-size: 18px;
 }
 
 
-.magang-card:nth-child(2n) .magang-company-logo {
+.perusahaan-logo.black {
     background: #070707;
 
     color: #f6e12a;
-}
-
-
-.magang-card:nth-child(3n) .magang-company-logo {
-    background: #fdfdfd;
-
-    color: #070707;
-
-    border: 2px solid #f6e12a;
 }
 
 
@@ -602,12 +577,14 @@
    BOOKMARK
 ========================================================= */
 
-.magang-bookmark {
+.perusahaan-bookmark {
     width: 35px;
     height: 35px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border: 1px solid #e5e7eb;
@@ -618,18 +595,16 @@
 
     color: #94a3b8;
 
-    font-size: 14px;
-
     cursor: pointer;
 
     transition: 0.25s ease;
 }
 
 
-.magang-bookmark:hover {
-    border-color: #f6e12a;
-
+.perusahaan-bookmark:hover {
     background: #f6e12a;
+
+    border-color: #f6e12a;
 
     color: #070707;
 }
@@ -639,10 +614,10 @@
    CATEGORY
 ========================================================= */
 
-.magang-category {
-    display: inline-block;
-
+.perusahaan-category {
     align-self: flex-start;
+
+    display: inline-block;
 
     margin-bottom: 10px;
 
@@ -660,25 +635,18 @@
 }
 
 
-.magang-card:nth-child(2n) .magang-category {
-    background: #070707;
-
-    color: #f6e12a;
-}
-
-
 /* =========================================================
    TITLE
 ========================================================= */
 
-.magang-card h3 {
-    min-height: 44px;
+.perusahaan-card h3 {
+    min-height: 22px;
 
-    margin: 0 0 7px;
+    margin: 0 0 10px;
 
     color: #070707;
 
-    font-size: 15px;
+    font-size: 16px;
 
     line-height: 1.4;
 
@@ -687,11 +655,11 @@
 
 
 /* =========================================================
-   COMPANY
+   DESCRIPTION
 ========================================================= */
 
-.magang-company {
-    min-height: 20px;
+.perusahaan-description {
+    min-height: 58px;
 
     margin: 0 0 18px;
 
@@ -699,7 +667,7 @@
 
     font-size: 11px;
 
-    font-weight: 500;
+    line-height: 1.7;
 }
 
 
@@ -707,7 +675,7 @@
    INFO
 ========================================================= */
 
-.magang-info {
+.perusahaan-info {
     display: flex;
 
     flex-direction: column;
@@ -720,7 +688,7 @@
 }
 
 
-.magang-info span {
+.perusahaan-info span {
     display: flex;
 
     align-items: center;
@@ -733,7 +701,7 @@
 }
 
 
-.magang-info i {
+.perusahaan-info i {
     color: #070707;
 
     font-size: 12px;
@@ -744,7 +712,7 @@
    CARD BOTTOM
 ========================================================= */
 
-.magang-card-bottom {
+.perusahaan-card-bottom {
     display: flex;
 
     align-items: center;
@@ -757,7 +725,7 @@
 }
 
 
-.magang-status {
+.perusahaan-status {
     display: inline-flex;
 
     align-items: center;
@@ -772,21 +740,21 @@
 }
 
 
-.magang-status i {
+.perusahaan-status i {
     color: #f6e12a;
 
     font-size: 7px;
 }
 
 
-.magang-detail-button {
+.perusahaan-detail-button {
     display: inline-flex;
 
     align-items: center;
 
     gap: 5px;
 
-    padding: 7px 10px;
+    padding: 8px 10px;
 
     border-radius: 7px;
 
@@ -802,7 +770,7 @@
 }
 
 
-.magang-detail-button:hover {
+.perusahaan-detail-button:hover {
     background: #070707;
 
     color: #f6e12a;
@@ -812,10 +780,10 @@
 
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
 ========================================================= */
 
-.magang-empty {
+.perusahaan-empty {
     grid-column: 1 / -1;
 
     padding: 70px 30px;
@@ -830,12 +798,14 @@
 }
 
 
-.magang-empty-icon {
+.perusahaan-empty-icon {
     width: 70px;
     height: 70px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     margin: 0 auto 18px;
@@ -850,7 +820,7 @@
 }
 
 
-.magang-empty h3 {
+.perusahaan-empty h3 {
     margin-bottom: 8px;
 
     color: #070707;
@@ -861,7 +831,7 @@
 }
 
 
-.magang-empty p {
+.perusahaan-empty p {
     max-width: 450px;
 
     margin: 0 auto;
@@ -878,14 +848,14 @@
    CTA
 ========================================================= */
 
-.magang-cta-section {
+.perusahaan-cta-section {
     padding: 30px 0 90px;
 
     background: #f8fafc;
 }
 
 
-.magang-cta {
+.perusahaan-cta {
     position: relative;
 
     overflow: hidden;
@@ -906,9 +876,7 @@
 }
 
 
-/* CTA decorative circle */
-
-.magang-cta::before {
+.perusahaan-cta::before {
     content: "";
 
     position: absolute;
@@ -925,31 +893,14 @@
 }
 
 
-.magang-cta::after {
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    left: -90px;
-    bottom: -100px;
-
-    border-radius: 50%;
-
-    background: rgba(246, 225, 42, 0.06);
-}
-
-
-.magang-cta-content {
+.perusahaan-cta-content {
     position: relative;
 
     z-index: 2;
 }
 
 
-.magang-cta-content > span {
+.perusahaan-cta-content > span {
     display: block;
 
     margin-bottom: 8px;
@@ -964,7 +915,7 @@
 }
 
 
-.magang-cta-content h2 {
+.perusahaan-cta-content h2 {
     margin: 0;
 
     color: #fdfdfd;
@@ -973,13 +924,11 @@
 
     line-height: 1.2;
 
-    letter-spacing: -0.7px;
-
     font-weight: 800;
 }
 
 
-.magang-cta-content p {
+.perusahaan-cta-content p {
     max-width: 600px;
 
     margin-top: 10px;
@@ -996,7 +945,7 @@
    CTA BUTTON
 ========================================================= */
 
-.magang-cta-button {
+.perusahaan-cta-button {
     position: relative;
 
     z-index: 2;
@@ -1027,41 +976,12 @@
 }
 
 
-.magang-cta-button:hover {
+.perusahaan-cta-button:hover {
     background: #fdfdfd;
 
     color: #070707;
 
     transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(246, 225, 42, 0.18);
-}
-
-
-/* =========================================================
-   SEARCH FILTER ANIMATION
-========================================================= */
-
-.magang-card {
-    animation: magangCardIn 0.35s ease both;
-}
-
-
-@keyframes magangCardIn {
-
-    from {
-        opacity: 0;
-
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform: translateY(0);
-    }
-
 }
 
 
@@ -1071,44 +991,23 @@
 
 @media (max-width: 1100px) {
 
-    .magang-search-card {
+    .perusahaan-search-card {
         grid-template-columns: 1fr 1fr;
-
     }
 
-    .magang-search-box {
+
+    .perusahaan-search-box {
         grid-column: 1 / -1;
     }
 
-    .magang-search-button {
+
+    .perusahaan-search-button {
         width: 100%;
     }
 
-    .magang-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
 
-}
-
-
-/* =========================================================
-   TABLET SMALL
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .magang-hero {
-        padding: 80px 0 90px;
-    }
-
-
-    .magang-grid {
+    .perusahaan-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-
-    .magang-cta {
-        padding: 45px 40px;
     }
 
 }
@@ -1120,29 +1019,29 @@
 
 @media (max-width: 768px) {
 
-    .magang-hero {
+    .perusahaan-hero {
         padding: 65px 0 75px;
     }
 
 
-    .magang-hero-content h1 {
+    .perusahaan-hero-content h1 {
         font-size: 40px;
 
         letter-spacing: -1.5px;
     }
 
 
-    .magang-hero-content p {
+    .perusahaan-hero-content p {
         font-size: 13px;
     }
 
 
-    .magang-search-section {
+    .perusahaan-search-section {
         padding-bottom: 60px;
     }
 
 
-    .magang-search-card {
+    .perusahaan-search-card {
         grid-template-columns: 1fr;
 
         margin-top: -25px;
@@ -1151,27 +1050,22 @@
     }
 
 
-    .magang-search-box {
+    .perusahaan-search-box {
         grid-column: auto;
     }
 
 
-    .magang-filter {
+    .perusahaan-search-button {
         width: 100%;
     }
 
 
-    .magang-search-button {
-        width: 100%;
-    }
-
-
-    .magang-program-section {
+    .perusahaan-section {
         padding: 70px 0;
     }
 
 
-    .magang-section-heading {
+    .perusahaan-section-heading {
         align-items: flex-start;
 
         flex-direction: column;
@@ -1180,27 +1074,22 @@
     }
 
 
-    .magang-result {
+    .perusahaan-result {
         align-self: flex-start;
     }
 
 
-    .magang-grid {
+    .perusahaan-grid {
         grid-template-columns: 1fr;
     }
 
 
-    .magang-card {
+    .perusahaan-card {
         padding: 20px;
     }
 
 
-    .magang-cta-section {
-        padding-bottom: 70px;
-    }
-
-
-    .magang-cta {
+    .perusahaan-cta {
         align-items: flex-start;
 
         flex-direction: column;
@@ -1211,7 +1100,7 @@
     }
 
 
-    .magang-cta-button {
+    .perusahaan-cta-button {
         width: 100%;
     }
 
@@ -1224,36 +1113,36 @@
 
 @media (max-width: 480px) {
 
-    .magang-hero-content h1 {
+    .perusahaan-hero-content h1 {
         font-size: 34px;
 
         letter-spacing: -1px;
     }
 
 
-    .magang-hero-content p {
+    .perusahaan-hero-content p {
         font-size: 12px;
     }
 
 
-    .magang-eyebrow {
+    .perusahaan-eyebrow {
         font-size: 9px;
     }
 
 
-    .magang-card-bottom {
+    .perusahaan-card-bottom {
         align-items: flex-start;
 
         flex-direction: column;
     }
 
 
-    .magang-detail-button {
+    .perusahaan-detail-button {
         width: 100%;
     }
 
 
-    .magang-cta-content h2 {
+    .perusahaan-cta-content h2 {
         font-size: 26px;
     }
 

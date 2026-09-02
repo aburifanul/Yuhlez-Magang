@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\PerusahaanController;
 use App\Http\Controllers\Intern\DashboardController;
 use App\Http\Controllers\Dashboard\MagangController;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,10 @@ Route::get('/magang/{slug}', function ($slug) {
     ]);
 
 })->name('magang.detail');
+
+
+Route::get('/perusahaan', [PerusahaanController::class, 'index'])
+    ->name('dashboard.perusahaan');
 
 // route ke intern
 Route::middleware(['auth'])->prefix('intern')->name('intern.')->group(function () {

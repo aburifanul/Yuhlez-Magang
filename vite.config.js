@@ -13,7 +13,8 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/dashboard.css',
                 'resources/css/auth.css',
-                'reseorces/css/magang.css',
+                'reseources/css/magang.css',
+                'resources/css/perusahaan.css',
 
                 'resources/js/app.js',
                 'resources/js/dashboard.js',

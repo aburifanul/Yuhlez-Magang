@@ -23,6 +23,7 @@
         'resources/css/dashboard.css',
         'resources/css/auth.css',
         'resources/css/magang.css',
+        'resources/css/perusahaan.css',
         'resources/js/dashboard.js'
     ])
 
@@ -137,7 +138,8 @@
             {{-- PERUSAHAAN --}}
 
             <a
-                href="{{ route('dashboard.index') }}#perusahaan"
+                href="{{ route('dashboard.perusahaan') }}"
+                
             >
                 Perusahaan
             </a>

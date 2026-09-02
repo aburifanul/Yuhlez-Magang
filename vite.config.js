@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/css/auth.css',
                 'reseources/css/magang.css',
                 'resources/css/perusahaan.css',
+                'resources/css/tentang.css',
 
                 'resources/js/app.js',
                 'resources/js/dashboard.js',

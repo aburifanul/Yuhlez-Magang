@@ -139,7 +139,8 @@
 
             <a
                 href="{{ route('dashboard.perusahaan') }}"
-                
+                class="{{ request()->routeIs('dashboard.perusahaan') ? 'active' : '' }}"
+
             >
                 Perusahaan
             </a>
@@ -148,7 +149,8 @@
             {{-- TENTANG KAMI --}}
 
             <a
-                href="{{ route('dashboard.index') }}#tentang-yuhlez"
+                href="{{ route('dashboard.tentang') }}"
+                class="{{ request()->routeIs('dashboard.tentang') ? 'active' : '' }}"
             >
                 Tentang Kami
             </a>

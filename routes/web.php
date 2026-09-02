@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
 use App\Http\Controllers\Intern\DashboardController;
 use App\Http\Controllers\Dashboard\MagangController;
+use App\Http\Controllers\Dashboard\TentangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +30,13 @@ Route::get('/magang/{slug}', function ($slug) {
 
 })->name('magang.detail');
 
-
+// route ke perusahaan
 Route::get('/perusahaan', [PerusahaanController::class, 'index'])
     ->name('dashboard.perusahaan');
+
+// route ke tentang
+Route::get('/tentang-kami', [TentangController::class, 'index'])
+    ->name('dashboard.tentang');
 
 // route ke intern
 Route::middleware(['auth'])->prefix('intern')->name('intern.')->group(function () {

@@ -52,7 +52,7 @@
 
                 {{-- KE TENTANG YUHLEZ --}}
                 <a
-                    href="{{ url('/') }}#tentang-yuhlez"
+                    href="{{ url('/tentang-kami') }}#tentang-yuhlez"
                     class="dashboard-btn-secondary"
                 >
                     Pelajari Lebih Lanjut
